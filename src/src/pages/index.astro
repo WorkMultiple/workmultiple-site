@@ -1,0 +1,315 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import EmailCapture from '../components/EmailCapture.astro';
+import { getCollection } from 'astro:content';
+
+// Get blog posts for Latest Articles section
+let posts: any[] = [];
+try {
+  const allPosts = await getCollection('blog');
+  posts = allPosts
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+    .slice(0, 3);
+} catch {
+  // No blog posts yet, section will show empty state
+}
+---
+
+<BaseLayout title="WorkMultiple | More done. Same team.">
+  <Header />
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1>More done. Same team.</h1>
+      <p class="hero-sub">Practical AI playbooks and guides for business owners who want results, not theory.</p>
+      <a href="#subscribe" class="btn btn-primary">Get the free guides</a>
+    </div>
+  </section>
+
+  <!-- Credibility -->
+  <section class="credibility">
+    <div class="container">
+      <div class="cred-grid">
+        <div class="cred-item">
+          <h3>Tested, not theoretical.</h3>
+          <p>We build and test every workflow before publishing it.</p>
+        </div>
+        <div class="cred-item">
+          <h3>Implementation-ready.</h3>
+          <p>Exact steps, exact tool settings, exact prompts. Follow along, get results.</p>
+        </div>
+        <div class="cred-item">
+          <h3>Built for non-technical people.</h3>
+          <p>No coding required. No jargon. Just clear instructions that work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles -->
+  <section class="latest-articles">
+    <div class="container">
+      <h2>Latest articles</h2>
+      {posts.length > 0 ? (
+        <div class="articles-grid">
+          {posts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="article-card">
+              <time datetime={post.data.date}>{new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="articles-empty">
+          <p>First articles coming soon. Practical tool comparisons, workflow breakdowns, and AI guides built for business owners.</p>
+          <a href="#subscribe" class="empty-cta">Get notified when we publish &rarr;</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Playbooks Coming Soon -->
+  <section class="playbooks-teaser">
+    <div class="container playbooks-inner">
+      <h2>Premium playbooks. Coming soon.</h2>
+      <p>Step-by-step implementation guides that save you 20+ hours of trial and error. Each playbook covers one specific business problem, with exact tool settings, exact prompts, screenshots of every screen, and troubleshooting guides. Built for people who aren't developers.</p>
+      <a href="#subscribe" class="btn btn-secondary">Get notified at launch</a>
+    </div>
+  </section>
+
+  <!-- Email Capture -->
+  <section class="subscribe" id="subscribe">
+    <div class="container subscribe-inner">
+      <h2>Skip the 20 hours of trial and error.</h2>
+      <p class="subscribe-sub">Get the exact AI workflows we test. Practical guides, tool reviews, and early access to new playbooks. No spam, no fluff.</p>
+      <EmailCapture />
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: 6rem 0 4rem;
+    text-align: center;
+  }
+
+  .hero-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-sub {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Credibility */
+  .credibility {
+    padding: 4rem 0;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cred-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+
+  .cred-item h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .cred-item p {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Latest Articles */
+  .latest-articles {
+    padding: 6rem 0;
+  }
+
+  .latest-articles h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .article-card {
+    display: block;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-surface);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .article-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .article-card time {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .article-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .article-card p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .articles-empty {
+    padding: 3rem;
+    border: 1px dashed var(--color-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .articles-empty p {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .empty-cta {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    transition: color 0.2s ease;
+  }
+
+  .empty-cta:hover {
+    color: var(--color-accent-hover);
+  }
+
+  /* Playbooks Teaser */
+  .playbooks-teaser {
+    padding: 5rem 0;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .playbooks-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .playbooks-teaser h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .playbooks-teaser p {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  /* Subscribe / Email Capture */
+  .subscribe {
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .subscribe-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .subscribe h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .subscribe-sub {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .beehiiv-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 0 3rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+    }
+
+    .cred-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .latest-articles h2,
+    .playbooks-teaser h2,
+    .subscribe h2 {
+      font-size: 1.75rem;
+    }
+  }
+</style>

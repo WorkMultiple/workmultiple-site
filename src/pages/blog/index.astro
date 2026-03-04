@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+let posts: any[] = [];
+try {
+  const allPosts = await getCollection('blog');
+  posts = allPosts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+} catch {
+  // No posts yet
+}
+---
+
+<BaseLayout
+  title="Blog | WorkMultiple"
+  description="Practical AI guides, tool comparisons, and workflow breakdowns. Tested, opinionated, and built for non-technical business owners."
+>
+  <Header />
+
+  <main>
+    <section class="blog-listing">
+      <div class="container">
+        <div class="blog-header animate-fade-up">
+          <h1 class="text-gradient">Blog</h1>
+          <p class="blog-intro">Practical AI guides, tool comparisons, and workflow breakdowns. Everything is tested. Everything is opinionated.</p>
+        </div>
+
+        {posts.length > 0 ? (
+          <div class="posts-grid fade-in-up" style="animation-delay: 0.1s">
+            {posts.map((post) => (
+              <a href={`/blog/${post.slug}`} class="post-card">
+                <div class="post-content">
+                  <time datetime={post.data.date}>{new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.description}</p>
+                </div>
+                <div class="post-arrow">&rarr;</div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div class="posts-empty glass-panel fade-in-up" style="animation-delay: 0.1s">
+            <div class="empty-icon">📝</div>
+            <p>First articles are on the way. Practical tool comparisons, workflow breakdowns, and AI guides built for business owners.</p>
+            <a href="/#subscribe" class="btn btn-accent empty-cta mt-4">Get notified when we publish</a>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-listing {
+    padding: 6rem 0 8rem;
+  }
+
+  .blog-header {
+    margin-bottom: 4rem;
+    max-width: 640px;
+  }
+
+  .blog-header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+  }
+
+  .blog-intro {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 800px;
+  }
+
+  .post-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    group: card;
+  }
+
+  .post-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: var(--color-surface-hover);
+  }
+
+  .post-content {
+    max-width: 600px;
+  }
+
+  .post-content time {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .post-content p {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .post-arrow {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    transition: all 0.3s ease;
+    transform: translateX(0);
+  }
+
+  .post-card:hover .post-arrow {
+    color: var(--color-accent);
+    transform: translateX(4px);
+  }
+
+  .posts-empty {
+    padding: 5rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .posts-empty p {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .blog-listing {
+      padding: 4rem 0 6rem;
+    }
+
+    .blog-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .post-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    .post-arrow {
+      align-self: flex-end;
+    }
+  }
+
+  .mt-4 {
+    margin-top: 1.5rem;
+  }
+</style>
