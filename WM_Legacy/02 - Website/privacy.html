@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N8EBSXFJLE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-N8EBSXFJLE');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — WorkMultiple</title>
+  <meta name="description" content="WorkMultiple's privacy policy. How we collect, use, and protect your information.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-bg: #FAFAFA;
+      --color-surface: #FFFFFF;
+      --color-text: #111111;
+      --color-text-secondary: #555555;
+      --color-text-muted: #888888;
+      --color-accent: #e9594a;
+      --color-accent-hover: #d14d3f;
+      --color-border: #E5E5E5;
+      --color-highlight: #F0F0F0;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --max-width: 1120px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 250, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+    }
+
+    /* ===== PAGE CONTENT ===== */
+    .page-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 140px 24px 120px;
+    }
+
+    .page-content h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .page-meta {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin-bottom: 48px;
+    }
+
+    .page-content h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+
+    .page-content p {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .page-content ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .page-content ul li {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .page-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-border);
+    }
+
+    .page-content a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(233, 89, 74, 0.3);
+      text-underline-offset: 2px;
+    }
+
+    .page-content a:hover {
+      text-decoration-color: var(--color-accent);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 48px 24px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .page-content {
+        padding: 120px 20px 80px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">WorkMultiple</a>
+      <a href="https://calendar.app.google/j8mk2poAtLT5D6TUA" class="btn btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ===== PRIVACY POLICY ===== -->
+  <div class="page-content">
+    <h1>Privacy Policy</h1>
+    <p class="page-meta">Effective February 27, 2026</p>
+
+    <p>WorkMultiple ("we," "us," or "our") respects your privacy. This policy explains what information we collect, how we use it, and how we protect it. We keep this straightforward because that is how we operate.</p>
+
+    <h2>What We Collect</h2>
+    <p>When you book a discovery call through our website, our Google Calendar booking form collects:</p>
+    <ul>
+      <li>Your name</li>
+      <li>Your email address</li>
+      <li>Your company website</li>
+      <li>Your answer to the question "What's taking your team the most time right now?"</li>
+    </ul>
+    <p>We may also collect your name and email address if you contact us directly via email.</p>
+
+    <h2>How We Use Your Information</h2>
+    <p>We use the information you provide to:</p>
+    <ul>
+      <li>Schedule and conduct discovery calls with you</li>
+      <li>Understand your business needs so we can prepare for our conversation</li>
+      <li>Follow up with you after our call</li>
+      <li>Communicate with you about our services</li>
+    </ul>
+    <p>We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+
+    <h2>Tools and Services We Use</h2>
+    <p>To run our business and communicate with you, we use the following third-party services:</p>
+    <ul>
+      <li><strong>Google Workspace</strong> (including Gmail and Google Calendar) for email communication and scheduling. Google's privacy policy applies to data processed through their services.</li>
+      <li><strong>Google Meet</strong> for video calls during discovery sessions. Calls are not recorded unless we ask for and receive your permission beforehand.</li>
+      <li><strong>Netlify</strong> for hosting this website. Netlify may collect standard server logs (such as IP addresses and browser type) as part of normal website hosting.</li>
+      <li><strong>Google Analytics</strong> for understanding how visitors use our website. This collects anonymized usage data such as pages visited, time on site, and general location. No personally identifiable information is collected through Analytics.</li>
+    </ul>
+
+    <h2>Cookies</h2>
+    <p>Our website uses cookies from Google Analytics to understand site traffic and usage patterns. These are standard analytics cookies and do not track you across other websites. You can disable cookies in your browser settings at any time.</p>
+
+    <h2>Data Storage and Security</h2>
+    <p>Your information is stored within Google Workspace, which provides enterprise-grade security including encryption in transit and at rest. We do not store your personal data in any other systems beyond what is necessary to communicate with you and deliver our services.</p>
+
+    <h2>Your Rights</h2>
+    <p>You can request to see, update, or delete any personal information we hold about you at any time. Just email us and we will take care of it promptly.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>If we make meaningful changes to this policy, we will update the effective date at the top of the page. We encourage you to review this page periodically.</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have questions about this privacy policy or how we handle your data, reach out to us at <a href="mailto:emilio@workmultiple.com">emilio@workmultiple.com</a>.</p>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">WorkMultiple</span>
+        <ul class="footer-links">
+          <li><a href="mailto:emilio@workmultiple.com">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+      <span class="footer-copy">&copy; 2026 WorkMultiple. All rights reserved.</span>
+    </div>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N8EBSXFJLE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-N8EBSXFJLE');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkMultiple — More done. Same team.</title>
+  <meta name="description"
+    content="WorkMultiple is a done-for-you AI agency that deploys AI agents to multiply your team's output — without multiplying your headcount.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-bg: #FAFAFA;
+      --color-surface: #FFFFFF;
+      --color-text: #111111;
+      --color-text-secondary: #555555;
+      --color-text-muted: #888888;
+      --color-accent: #e9594a;
+      --color-accent-hover: #d14d3f;
+      --color-border: #E5E5E5;
+      --color-highlight: #F0F0F0;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --max-width: 1120px;
+      --section-padding: 120px 24px;
+      --section-padding-mobile: 80px 20px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 250, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-text);
+      border: 1.5px solid var(--color-border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-text);
+    }
+
+    .btn-large {
+      padding: 14px 32px;
+      font-size: 1rem;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 160px 24px 120px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== SECTIONS (shared) ===== */
+    section {
+      padding: var(--section-padding);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 16px;
+    }
+
+    .section-heading {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .section-subheading {
+      font-size: 1.05rem;
+      color: var(--color-text-secondary);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* ===== PROBLEM SECTION ===== */
+    .problem {
+      background: var(--color-surface);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+    }
+
+    .problem-card {
+      padding: 32px;
+      border-radius: 12px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+    }
+
+    .problem-card .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--color-highlight);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    .problem-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .problem-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    .how-it-works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+      counter-reset: step;
+    }
+
+    .step-card {
+      position: relative;
+      padding: 32px;
+    }
+
+    .step-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-border);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .step-card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .step-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Connector line between steps */
+    .step-card:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 48px;
+      right: -16px;
+      width: 32px;
+      height: 2px;
+      background: var(--color-border);
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      background: var(--color-surface);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .service-item {
+      padding: 28px 32px;
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      transition: border-color 0.2s;
+    }
+
+    .service-item:hover {
+      border-color: #CCCCCC;
+    }
+
+    .service-item h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .service-item p {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ===== DIFFERENTIATOR ===== */
+    .differentiator-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-top: 56px;
+    }
+
+    .diff-text p {
+      font-size: 1.05rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .diff-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .diff-visual {
+      padding: 40px;
+      border-radius: 16px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+
+    .diff-comparison {
+      list-style: none;
+    }
+
+    .diff-comparison li {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .diff-comparison li:last-child {
+      border-bottom: none;
+    }
+
+    .diff-them {
+      flex: 1;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+      text-decoration-color: var(--color-border);
+    }
+
+    .diff-us {
+      flex: 1;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* ===== TRUST ===== */
+    .trust {
+      background: var(--color-surface);
+      text-align: center;
+    }
+
+    .trust-content {
+      max-width: 560px;
+      margin: 0 auto;
+      margin-top: 48px;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .trust-badge svg {
+      flex-shrink: 0;
+    }
+
+    .trust-quote {
+      font-size: 1.05rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ===== FINAL CTA ===== */
+    .final-cta {
+      text-align: center;
+      padding: 120px 24px;
+    }
+
+    .final-cta .section-heading {
+      margin-bottom: 16px;
+    }
+
+    .final-cta .section-subheading {
+      margin: 0 auto 40px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 48px 24px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+
+    /* Problem Icons Animation */
+    .problem-card:hover .icon svg {
+      transform: scale(1.1) rotate(5deg);
+      transition: transform 0.3s ease;
+    }
+
+    .problem-card .icon svg {
+      transition: transform 0.3s ease;
+    }
+
+    /* Services Hover */
+    .service-item {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .service-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+      border-color: var(--color-accent);
+    }
+
+    /* Differentiator Graphic */
+    .diff-graphic {
+      margin-top: 32px;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      section {
+        padding: var(--section-padding-mobile);
+      }
+
+      .hero {
+        padding: 130px 20px 80px;
+      }
+
+      .problem-grid,
+      .how-it-works-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .step-card:not(:last-child)::after {
+        display: none;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .differentiator-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">WorkMultiple</a>
+      <a href="https://calendar.app.google/j8mk2poAtLT5D6TUA" class="btn btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <h1 class="fade-up">More done. Same team.</h1>
+    <h2 class="fade-up" style="transition-delay: 100ms;">Multiply your workforce with AI agents that actually run your
+      operations, so your team can focus on growth.</h2>
+    <div class="hero-cta fade-up" style="transition-delay: 200ms;">
+      <a href="https://calendar.app.google/j8mk2poAtLT5D6TUA" class="btn btn-primary btn-large">Book a Free Discovery Call</a>
+      <a href="#how-it-works" class="btn btn-outline btn-large">See How It Works</a>
+    </div>
+
+  </section>
+
+  <!-- ===== PROBLEM ===== -->
+  <section class="problem">
+    <div class="container">
+      <p class="section-label">Sound familiar?</p>
+      <h2 class="section-heading">Your team is growing, but your<br>capacity isn't keeping up.</h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="8" stroke="#555" stroke-width="1.5" />
+              <path d="M10 6v4l3 2" stroke="#555" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h3>Repeatable work is eating your days</h3>
+          <p>Reporting, data entry, follow-ups, scheduling. Your team spends hours on tasks that should take minutes.
+          </p>
+        </div>
+        <div class="problem-card">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M14 7l-5 5-3-3" stroke="#555" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <rect x="2" y="2" width="16" height="16" rx="3" stroke="#555" stroke-width="1.5" />
+            </svg>
+          </div>
+          <h3>Hiring can't keep up with demand</h3>
+          <p>You need more output, but every new hire means onboarding, salaries, and overhead you're not ready for.</p>
+        </div>
+        <div class="problem-card">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M10 4v12" stroke="#555" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h3>AI sounds great, but where do you start?</h3>
+          <p>You know AI could help. But between the hype and the jargon, it's hard to know what's real and what's worth
+            your time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section id="how-it-works">
+    <div class="container">
+      <p class="section-label">How it works</p>
+      <h2 class="section-heading">Three steps to a bigger team<br>without a bigger payroll.</h2>
+      <div class="how-it-works-grid">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <h3>Audit</h3>
+          <p>We dig into your workflows and find the ones burning the most time. No guesswork. No strategy decks. Just a
+            clear picture of what to automate first.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <h3>Build</h3>
+          <p>We design and deploy AI agents tailored to your operations. These aren't chatbots. They handle complex,
+            multi-step work your team actually does every day.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <h3>Run</h3>
+          <p>Your agents go live and start working. We monitor performance, make adjustments, and keep everything
+            running. You get the output without the overhead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services">
+    <div class="container">
+      <p class="section-label">What we deploy</p>
+      <h2 class="section-heading">AI agents that handle the work<br>your team shouldn't have to.</h2>
+      <p class="section-subheading">Every workflow we build for you, we've already tested on ourselves.</p>
+      <div class="services-grid">
+        <div class="service-item">
+          <h3>Operations Automation</h3>
+          <p>Turn manual reporting, data processing, and admin tasks into automated workflows that run on schedule.</p>
+        </div>
+        <div class="service-item">
+          <h3>Sales Pipeline</h3>
+          <p>Lead research, outreach drafting, follow-up sequences, and CRM updates. Your pipeline moves without your
+            team chasing it.</p>
+        </div>
+        <div class="service-item">
+          <h3>Marketing Workflows</h3>
+          <p>Content drafting, campaign tracking, performance reports, and social scheduling. Consistent output without
+            a full team.</p>
+        </div>
+        <div class="service-item">
+          <h3>Reporting &amp; Briefings</h3>
+          <p>Daily and weekly briefings pulled from your data. Delivered to your inbox, Slack, or dashboard. No manual
+            assembly.</p>
+        </div>
+        <div class="service-item">
+          <h3>Client Onboarding</h3>
+          <p>Automate intake forms, welcome sequences, and kickoff workflows so new clients get started faster.</p>
+        </div>
+        <div class="service-item">
+          <h3>Custom Workflows</h3>
+          <p>Have a process that's uniquely yours? We'll build an agent for it. If it's repeatable, it's automatable.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DIFFERENTIATOR ===== -->
+  <section class="differentiator">
+    <div class="container">
+      <p class="section-label">Why WorkMultiple</p>
+      <h2 class="section-heading">We use the same tools on ourselves.<br>Our business is the demo.</h2>
+      <div class="differentiator-content">
+        <div class="diff-text">
+          <p>Most AI agencies sell you a vision. We show you a working system. Our own lead generation, marketing, sales
+            outreach, and operations all run on the same agentic workflows we deploy for clients.</p>
+          <p>That means every workflow we offer has been tested, tuned, and proven in a real business before it ever
+            touches yours.</p>
+        </div>
+        <div class="diff-visual">
+          <ul class="diff-comparison">
+            <li>
+              <span class="diff-them">"We build custom AI solutions"</span>
+              <span class="diff-us">"We multiply your team's output"</span>
+            </li>
+            <li>
+              <span class="diff-them">"Strategy + implementation"</span>
+              <span class="diff-us">"We deploy agents that run your operations"</span>
+            </li>
+            <li>
+              <span class="diff-them">"Let's explore the possibilities"</span>
+              <span class="diff-us">"Here's what we'll automate and when"</span>
+            </li>
+            <li>
+              <span class="diff-them">Vague case studies</span>
+              <span class="diff-us">Live demos from our own workflows</span>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST ===== -->
+  <section class="trust">
+    <div class="container">
+      <p class="section-label">Built to earn your trust</p>
+      <h2 class="section-heading">We're just getting started.<br>But we're not starting from scratch.</h2>
+      <div class="trust-content">
+        <div class="trust-badge">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 1l2.47 5.01L17 6.87l-4 3.9.94 5.5L9 13.77l-4.94 2.5.94-5.5-4-3.9 5.53-.86L9 1z" stroke="#555"
+              stroke-width="1.2" stroke-linejoin="round" />
+          </svg>
+          Built on Anthropic's Claude
+        </div>
+        <p class="trust-quote">"We built WorkMultiple because we believe every small business deserves the kind of
+          operational leverage that used to be reserved for companies with massive teams and budgets."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="final-cta">
+    <p class="section-label">Ready?</p>
+    <h2 class="section-heading">More done. Same team.</h2>
+    <p class="section-subheading">Tell us what's taking your team the most time. We'll show you what an AI agent can do
+      about it.</p>
+    <a href="https://calendar.app.google/j8mk2poAtLT5D6TUA" class="btn btn-primary btn-large">Book a Free Discovery Call</a>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">WorkMultiple</span>
+        <ul class="footer-links">
+          <li><a href="mailto:emilio@workmultiple.com">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+      <span class="footer-copy">&copy; 2026 WorkMultiple. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Elements to animate
+      const animatedElements = document.querySelectorAll(`
+        .problem .container > *,
+        .how-it-works-grid .step-card,
+        .services-grid .service-item,
+        .diff-text > *,
+        .diff-visual,
+        .trust-content > *,
+        .final-cta > *
+      `);
+
+      animatedElements.forEach((el, index) => {
+        el.classList.add('fade-up');
+        // Add slight cascade delay
+        el.style.transitionDelay = `${(index % 3) * 100}ms`;
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+
+</html>
