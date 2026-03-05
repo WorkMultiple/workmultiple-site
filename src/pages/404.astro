@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Page not found | WorkMultiple">
+  <Header />
+  <main>
+    <section class="not-found">
+      <div class="container">
+        <h1>404</h1>
+        <p>This page doesn't exist. It may have been moved or removed.</p>
+        <a href="/" class="btn btn-primary">Back to home</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: 10rem 0;
+    text-align: center;
+  }
+
+  .not-found h1 {
+    font-size: 6rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, #00e5ff 0%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+  }
+
+  .not-found p {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+  }
+</style>
