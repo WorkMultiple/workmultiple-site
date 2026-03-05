@@ -26,6 +26,12 @@
 | 2026-03-04 | Keyword research informs playbook topics after the first one | First playbook topic is already defined (agency automation). Future topics should be validated by search demand and audience interest. |
 | 2026-03-04 | Legacy files preserved in WM_Legacy/ | All agency-era files are kept for reference and as source material. None deleted. The new 00 - Context/ folder is the authoritative source going forward. |
 | 2026-03-04 | Static site generator: Astro | Astro selected over 11ty. Built-in content collections, SEO integrations (sitemap, RSS), and component model are a better fit for a content-driven site that will grow with regular blog posts. Deploys to Netlify with a single config file. |
+| 2026-03-04 | Brand restyled to premium dark theme | Light theme replaced with dark mode. Electric Cyan (#00e5ff) as primary accent, Indigo (#6366f1) as secondary for gradients. Deep Zinc (#09090b) background. Glassmorphism, subtle glowing gradients, and polished micro-interactions. See BRAND.md Visual Direction for full details. |
+| 2026-03-04 | Native email form replaces Beehiiv iframe | Beehiiv iframe embed replaced with a custom HTML form (EmailCapture.astro) that submits to a Netlify Function (netlify/functions/subscribe.mjs), which proxies to the Beehiiv API. This gives full styling control (gradient button, mobile responsiveness) and keeps the API key server-side. Requires BEEHIIV_API_KEY and BEEHIIV_PUBLICATION_ID as Netlify environment variables. |
+| 2026-03-04 | Deploy via GitHub + Netlify (not drag-and-drop) | Because the native email form uses a Netlify Function, the full project must be deployed via GitHub integration (not just the dist folder). Repo: github.com/WorkMultiple/workmultiple-site. |
+| 2026-03-05 | Netlify Function uses v1 handler format (not v2) | The subscribe function uses `export const handler` (v1) instead of `export default` (v2). V2's custom path routing caused intermittent 404s. V1 functions are automatically served at `/.netlify/functions/<filename>` without custom config. |
+| 2026-03-05 | No catch-all redirect in netlify.toml | A `/* -> /404` catch-all redirect interfered with Netlify Function routing. Removed in favor of a custom 404.astro page, which Astro compiles to `dist/404.html` and Netlify serves automatically for missing routes. |
+| 2026-03-05 | GitHub account for repo: WorkMultiple | The workmultiple-site repo is owned by the WorkMultiple GitHub account (not leodotbiz). Authentication uses a fine-grained Personal Access Token with "Contents: read and write" permission. |
 
 ---
 
@@ -38,7 +44,7 @@ These decisions were made during the agency build and remain valid in the new mo
 | 2026-02-26 | Brand name: WorkMultiple | Still valid |
 | 2026-02-26 | Tagline: "More done. Same team." | Still valid |
 | 2026-02-26 | Brand stands alone (not founder-led) | Still valid |
-| 2026-02-26 | Website theme: light, Inter, coral accent | Still valid |
+| 2026-02-26 | Website theme: light, Inter, coral accent | Superseded by dark theme (see 2026-03-04 decision) |
 | 2026-02-27 | Google Workspace (emilio@workmultiple.com) | Still valid |
 | 2026-02-27 | Netlify for hosting | Still valid |
 | 2026-02-27 | SVG favicon: W in coral on white | Still valid |

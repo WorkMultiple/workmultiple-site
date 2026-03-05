@@ -6,9 +6,11 @@
 
 ## Current Focus
 
-**Phase 0: Context Architecture** — Complete. New context files created for the playbook/authority model. All legacy files preserved in WM_Legacy/.
+**Phase 0: Context Architecture** — Complete.
 
-**Phase 1 (Minimal Site Build)** — In progress. Astro selected. Beehiiv embed ready. Next: Build homepage.
+**Phase 1: Minimal Site Build** — Complete. Site is live at workmultiple.com with automated GitHub-to-Netlify deploys. Native email capture form is working end-to-end (submissions flow to Beehiiv).
+
+**Phase 2: First Free Content + Community Distribution** — Not started. Next up: write and publish the first 3 free articles, starting with the pivot story.
 
 ---
 
@@ -22,15 +24,19 @@
 
 ## Phase 1: Minimal Site Build (1 to 2 weeks)
 
-Build and deploy a lean site on Astro (or 11ty) with Netlify. Three things at launch: homepage, blog, and email capture. Full site pages are deferred to Phase 4.
+Build and deploy a lean site on Astro with Netlify. Three things at launch: homepage, blog, and email capture. Full site pages are deferred to Phase 4.
 
 | Step | Status | Notes |
 |---|---|---|
 | 4. Select static site generator (Astro or 11ty) | COMPLETE | Astro selected. Built-in content collections, SEO integrations, and component model best fit a growing content site. |
-| 5. Select and set up email platform | COMPLETE | Beehiiv selected. Embed code and attribution script obtained. Using iframe embed (Option A). Welcome sequence to be configured in Beehiiv dashboard. |
-| 6. Build homepage | NOT STARTED | Hero with updated positioning (see BRAND.md), brief credibility section, email capture form, "Playbooks coming soon" teaser section. |
-| 7. Build blog section | NOT STARTED | Clean URLs, proper heading hierarchy, meta descriptions, Open Graph tags. SEO foundations from WEBSITE_REQUIREMENTS.md apply. |
-| 8. Deploy to Netlify | NOT STARTED | Replace the current agency site at workmultiple.com. |
+| 5. Select and set up email platform | COMPLETE | Beehiiv selected. Native form component built (EmailCapture.astro) with a Netlify Function (netlify/functions/subscribe.mjs) that proxies to the Beehiiv API. Beehiiv attribution tracking script in BaseLayout head. |
+| 6. Build homepage | COMPLETE | Hero with updated positioning, credibility section (3 value cards), latest articles section (auto-populates from blog, empty state when no posts), playbooks teaser, email capture form. Brand restyled to premium dark theme (see BRAND.md Visual Direction). |
+| 7. Build blog section | COMPLETE | Blog listing page at /blog with empty state. Individual post template at /blog/[id] with full typography and email capture CTA at bottom. Content collection configured for Markdown posts in src/content/blog/. Clean URLs, meta descriptions, Open Graph tags, Twitter Cards. |
+| 7a. Build privacy and terms pages | COMPLETE | Updated content reflecting the playbook/content model (removed agency references). Located at /privacy and /terms. |
+| 7b. GA4 tracking | COMPLETE | Google Analytics script (G-N8EBSXFJLE) added to BaseLayout head, runs on all pages. |
+| 8. Deploy to Netlify | COMPLETE | Site deployed via GitHub integration (not drag-and-drop). Repo: github.com/WorkMultiple/workmultiple-site. Auto-deploys on push to main. Build command: `npm run build`. Publish directory: `dist`. Functions directory: `netlify/functions`. |
+| 8a. Native email form verified end-to-end | COMPLETE | EmailCapture.astro component submits to Netlify Function (subscribe.mjs, v1 handler format) which proxies to Beehiiv API. BEEHIIV_API_KEY and BEEHIIV_PUBLICATION_ID set as Netlify environment variables (secret, Production + Deploy Previews). Subscribers confirmed flowing into Beehiiv. |
+| 8b. 404 page | COMPLETE | Custom 404.astro page added. Styled to match the dark theme. |
 
 ## Phase 2: First Free Content + Community Distribution (3 to 4 weeks)
 
@@ -93,6 +99,12 @@ This happens when the playbook library reaches 5 to 10 titles.
 
 - [x] Select static site generator — Astro
 - [x] Select email platform — Beehiiv
+- [x] Build and style site (premium dark theme)
+- [x] GA4 tracking added
+- [x] Push workmultiple-site to GitHub and connect to Netlify for automated deploys
+- [x] Set Netlify environment variables (BEEHIIV_API_KEY, BEEHIIV_PUBLICATION_ID)
+- [x] Native email capture form verified end-to-end (subscribers flowing into Beehiiv)
+- [x] Custom 404 page added
 - [ ] Decide on payment platform (Gumroad vs LemonSqueezy vs Stripe) — deferred to Phase 3
 - [ ] Logo / icon mark (carried forward from agency era; recommended before public launch)
 - [ ] Repurpose or remove Google Calendar booking link

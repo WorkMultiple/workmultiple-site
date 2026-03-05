@@ -27,17 +27,19 @@ The following pages are built after the first playbook is live and selling:
 
 ---
 
-## Current State
+## Current State (Phase 1 Complete)
 
-The existing site is a single-page agency landing page with:
-- Hero section pitching done-for-you AI agents for contractors
-- Service descriptions
-- Trust section with Anthropic badge
-- CTA buttons linking to a Google Calendar booking page
-- Privacy and Terms pages
-- Favicon (W in coral)
+The site is live at workmultiple.com, built with Astro and deployed via GitHub integration to Netlify (auto-deploys on push to main). The Astro project lives at `02 - Website/workmultiple-site/`. GitHub repo: `github.com/WorkMultiple/workmultiple-site`.
 
-All of this needs to be replaced. The booking link, the agency pitch, the service descriptions, and the contractor-focused messaging are no longer relevant.
+**What's live:**
+- Homepage: hero with updated positioning, credibility section (3 value cards), latest articles section (auto-populates from blog content collection, empty state when no posts), playbooks teaser, native email capture form with gradient button
+- Blog section: listing page at /blog, individual post template at /blog/[id], content collection configured for Markdown posts in `src/content/blog/`
+- Privacy page (/privacy) and Terms page (/terms)
+- Custom 404 page
+- GA4 tracking (G-N8EBSXFJLE) on all pages
+- Sitemap, robots.txt, Open Graph/Twitter Card meta tags, favicon
+- Native email capture form: custom EmailCapture.astro component submits to a Netlify Function (`netlify/functions/subscribe.mjs`, v1 handler format) that proxies to the Beehiiv API. BEEHIIV_API_KEY and BEEHIIV_PUBLICATION_ID are set as Netlify environment variables. Subscribers confirmed flowing into Beehiiv.
+- Premium dark theme (see BRAND.md Visual Direction)
 
 ---
 

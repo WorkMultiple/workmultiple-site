@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import EmailCapture from '../components/EmailCapture.astro';
 import { getCollection } from 'astro:content';
 
 // Get blog posts for Latest Articles section
@@ -110,17 +111,7 @@ try {
       <div class="container subscribe-inner">
         <h2>Skip the 20 hours of trial and error.</h2>
         <p class="subscribe-sub">Get the exact AI workflows we test. Practical guides, tool reviews, and early access to new playbooks. No spam, no fluff.</p>
-        <div class="beehiiv-wrapper glass-panel">
-          <script is:inline async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-          <iframe
-            src="https://subscribe-forms.beehiiv.com/20e51a6c-65f3-4d83-bea4-de245129feef"
-            class="beehiiv-embed"
-            data-test-id="beehiiv-embed"
-            frameborder="0"
-            scrolling="no"
-            style="width: 100%; max-width: 560px; height: 315px; margin: 0; border-radius: 0; background-color: transparent; box-shadow: none;"
-          ></iframe>
-        </div>
+        <EmailCapture />
       </div>
     </section>
   </main>
@@ -453,13 +444,6 @@ try {
     font-size: 1.125rem;
     color: var(--color-text-secondary);
     margin-bottom: 3rem;
-  }
-
-  .beehiiv-wrapper {
-    padding: 1.5rem;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
   }
 
   /* Fade in utilities */
