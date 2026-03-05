@@ -5,29 +5,31 @@ const headers = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
-export default async (req) => {
+export const handler = async (event) => {
   // Handle CORS preflight
-  if (req.method === 'OPTIONS') {
-    return new Response(null, { status: 204, headers });
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 204, headers, body: '' };
   }
 
   // Only allow POST
-  if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
       headers,
-    });
+      body: JSON.stringify({ error: 'Method not allowed' }),
+    };
   }
 
   try {
-    const { email } = await req.json();
+    const { email } = JSON.parse(event.body);
     console.log('Subscribe request received for:', email);
 
     if (!email || !email.includes('@')) {
-      return new Response(JSON.stringify({ error: 'Valid email is required' }), {
-        status: 400,
+      return {
+        statusCode: 400,
         headers,
-      });
+        body: JSON.stringify({ error: 'Valid email is required' }),
+      };
     }
 
     const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
@@ -35,10 +37,11 @@ export default async (req) => {
 
     if (!BEEHIIV_API_KEY || !BEEHIIV_PUBLICATION_ID) {
       console.error('Missing env vars - API_KEY:', !!BEEHIIV_API_KEY, 'PUB_ID:', !!BEEHIIV_PUBLICATION_ID);
-      return new Response(JSON.stringify({ error: 'Server configuration error' }), {
-        status: 500,
+      return {
+        statusCode: 500,
         headers,
-      });
+        body: JSON.stringify({ error: 'Server configuration error' }),
+      };
     }
 
     console.log('Calling Beehiiv API for publication:', BEEHIIV_PUBLICATION_ID);
@@ -64,25 +67,24 @@ export default async (req) => {
     console.log('Beehiiv API response:', response.status, responseData);
 
     if (!response.ok) {
-      return new Response(JSON.stringify({ error: 'Subscription failed. Please try again.' }), {
-        status: 500,
+      return {
+        statusCode: 500,
         headers,
-      });
+        body: JSON.stringify({ error: 'Subscription failed. Please try again.' }),
+      };
     }
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
+    return {
+      statusCode: 200,
       headers,
-    });
+      body: JSON.stringify({ success: true }),
+    };
   } catch (err) {
     console.error('Subscribe function error:', err.message, err.stack);
-    return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
-      status: 500,
+    return {
+      statusCode: 500,
       headers,
-    });
+      body: JSON.stringify({ error: 'Something went wrong. Please try again.' }),
+    };
   }
-};
-
-export const config = {
-  path: '/.netlify/functions/subscribe',
 };
