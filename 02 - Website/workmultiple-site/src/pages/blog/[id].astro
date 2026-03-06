@@ -2,14 +2,17 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+  return posts
+    .filter((post) => post.data.status === 'published')
+    .map((post) => ({
+      params: { id: post.id },
+      props: { post },
+    }));
 }
 
 const { post } = Astro.props;
@@ -34,6 +37,10 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
 
       <div class="post-content">
         <Content />
+      </div>
+
+      <div class="post-share">
+        <ShareButtons title={post.data.title} url={`https://workmultiple.com/blog/${post.id}`} />
       </div>
 
       <div class="post-footer">
@@ -191,10 +198,17 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
     box-shadow: var(--shadow-md);
   }
 
+  /* Share buttons */
+  .post-share {
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
   /* Post footer CTA */
   .post-footer {
-    margin-top: 5rem;
-    padding-top: 4rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
     border-top: 1px solid var(--color-border);
   }
 

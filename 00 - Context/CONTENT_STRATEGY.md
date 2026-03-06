@@ -4,6 +4,21 @@
 
 ---
 
+## Writing Collaboration Model
+
+**All article copy is written by Emilio, not AI.** Readers must trust that the content is authentic and human-written. AI-generated articles would undermine the credibility that WorkMultiple's content is designed to establish.
+
+**How we collaborate on each article:**
+
+1. **Outline:** Agent reviews source materials (WM_Legacy, research, etc.) and collaborates with Emilio on the article structure and outline.
+2. **Draft:** Emilio writes the full draft, including capturing screenshots and providing the narrative voice.
+3. **Edit and optimize:** Agent handles SEO optimization (schema markup, meta descriptions, keyword placement, Open Graph tags), screenshot styling (drop shadows, on-brand visual treatment), headline formatting, and internal/external linking recommendations.
+4. **Format and publish:** Agent formats the draft as Markdown for the Astro content collection, adds frontmatter, and prepares for deployment. Emilio reviews the final version before publish.
+
+**What the agent does NOT do:** Write article copy, rewrite Emilio's voice, or generate prose for publication. The agent's role is structural, technical, and optimization-focused.
+
+---
+
 ## The Content Engine
 
 WorkMultiple's content serves three purposes:
@@ -18,7 +33,7 @@ WorkMultiple's content serves three purposes:
 
 Before the first playbook goes on sale, WorkMultiple publishes 3 high-quality articles that establish authority and build an initial audience. Three is the target, not more. Quality matters more than volume, and content quantity must not become a bottleneck that delays the playbook launch.
 
-Each article is distributed to communities (Reddit, Indie Hackers, Twitter/X, LinkedIn) immediately upon publication. Community distribution is the primary traffic driver before SEO kicks in.
+Articles are published and measured organically first. Community distribution happens selectively after engagement signals confirm the content is resonating. See the "Distribution Philosophy" section below for the full approach.
 
 ### Article 1: The Pivot Story
 
@@ -132,34 +147,26 @@ As playbooks and articles naturally test and recommend tools, include affiliate 
 
 ---
 
-## Early Distribution (Before SEO Kicks In)
+## Distribution Philosophy
 
-SEO takes months to rank. The first playbook sales and traffic will come from community distribution. This is marketing, not sales. No DMs, no outbound, no cold messages.
+**Do not distribute to communities immediately upon publication.** Brand reception and authority are fragile. Premature exposure to an early-stage content library risks permanent dismissal from the communities we want to build credibility in. People form lasting first impressions of brands, and a thin content library or unpolished posts can undermine long-term credibility in spaces like Reddit and Indie Hackers.
 
-### Channels
+**The approach:**
 
-**Reddit:**
-- r/smallbusiness
-- r/entrepreneur
-- r/artificial
-- r/SideProject
-- Other relevant subreddits as discovered
+1. **Publish and measure organically.** Use GA4, on-site upvotes, and share activity to gauge engagement across multiple posts.
+2. **Iterate and improve.** Use engagement data to refine content quality, formatting, and headlines over time.
+3. **Distribute selectively.** Once a post shows strong organic engagement signals, distribute that specific post to communities. Not every post gets distributed. Lead with the strongest content.
+4. **Build credibility with proven content.** The first impression in any community should be the best content we have, not the first content we published.
 
-**Approach:** Post genuinely useful content (tool comparisons, lessons learned, workflow tutorials). Participate in discussions. Link to the full article on workmultiple.com when relevant, not to the sales page directly. Build credibility over time.
+### Channels (When Ready)
 
-**Indie Hackers:**
-- Share the pivot story and lessons learned.
-- Post about building in public.
-- Share tool comparisons and playbook progress.
+**Reddit:** r/smallbusiness, r/entrepreneur, r/artificial, r/SideProject, and other relevant subreddits as discovered. Post genuinely useful content. Participate in discussions. Link to the full article on workmultiple.com when relevant, not to the sales page directly.
 
-**Twitter/X ([@WorkMultipleAI](https://x.com/WorkMultipleAI)):**
-- Short-form versions of article insights.
-- Thread breakdowns of tools tested and results.
-- Build-in-public updates.
+**Indie Hackers:** Share lessons learned, tool comparisons, and building-in-public updates.
 
-**LinkedIn:**
-- Longer-form posts about AI workflow automation for business owners.
-- Position as a practical resource, not a thought leader.
+**Twitter/X ([@WorkMultipleAI](https://x.com/WorkMultipleAI)):** Short-form versions of article insights. Thread breakdowns of tools tested and results.
+
+**LinkedIn:** Longer-form posts about AI workflow automation for business owners. Position as a practical resource, not a thought leader.
 
 ### What NOT to Do
 
@@ -168,6 +175,7 @@ SEO takes months to rank. The first playbook sales and traffic will come from co
 - No podcast (same reasoning).
 - No DMs or outbound to individuals. The content does the selling.
 - No buying email lists or spamming communities.
+- No distributing to communities before engagement signals confirm the content is resonating.
 
 ---
 
