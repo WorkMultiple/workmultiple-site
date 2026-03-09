@@ -33,7 +33,7 @@ try {
         {posts.length > 0 ? (
           <div class="posts-grid fade-in-up" style="animation-delay: 0.1s">
             {posts.map((post) => (
-              <a href={`/blog/${post.slug}`} class="post-card">
+              <a href={`/blog/${post.id}`} class="post-card">
                 <div class="post-content">
                   <time datetime={post.data.date}>{new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
                   <h2>{post.data.title}</h2>
