@@ -7,8 +7,9 @@ import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
+  const isDev = import.meta.env.DEV;
   return posts
-    .filter((post) => post.data.status === 'published')
+    .filter((post) => isDev || post.data.status === 'published')
     .map((post) => ({
       params: { id: post.id },
       props: { post },
@@ -24,7 +25,17 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout title={`${post.data.title} | WorkMultiple`} description={post.data.description}>
+<BaseLayout
+  title={`${post.data.title} | WorkMultiple`}
+  description={post.data.description}
+  ogType="article"
+  articleSchema={{
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.date,
+    author: post.data.author,
+  }}
+>
   <Header />
 
   <article class="blog-post">

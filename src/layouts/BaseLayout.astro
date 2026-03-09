@@ -5,12 +5,21 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogType?: string;
+  articleSchema?: {
+    headline: string;
+    description: string;
+    datePublished: string;
+    author: string;
+  };
 }
 
 const {
   title,
   description = 'Practical AI playbooks and guides for business owners who want results, not theory.',
-  ogImage = '/og-default.png',
+  ogImage = '/WorkMultiple_Logo_800x800.png',
+  ogType = 'website',
+  articleSchema,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -35,7 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -57,6 +66,29 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Beehiiv attribution tracking -->
     <script is:inline type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+
+    {articleSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": articleSchema.headline,
+        "description": articleSchema.description,
+        "datePublished": articleSchema.datePublished,
+        "author": {
+          "@type": "Person",
+          "name": articleSchema.author,
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "WorkMultiple",
+          "url": "https://workmultiple.com",
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": canonicalURL.href,
+        },
+      })} />
+    )}
   </head>
   <body>
     <slot />

@@ -1,0 +1,183 @@
+---
+title: I Built an AI Automation Agency in 15 Hours. Here's How I Did It.
+description: >-
+  I built an AI automation agency from scratch in 15 hours using Claude Cowork.
+  Here's the exact process, prompts, and why I pivoted before signing a single
+  client.
+date: 2026-03-05
+author: Emilio Villareal
+status: published
+tags:
+  - ai-automation
+  - business-strategy
+  - behind-the-build
+---
+## The vision for WorkMultiple started as a simple idea.
+
+It would be an AI Automation agency. I understood that businesses are currently asking themselves how to use AI, but many times, they don't get further than ChatGPT. I saw an opportunity to help businesses adopt modern tools to streamline operations, accelerate growth, and focus on strategy. So, I began building it. 15 hours later across 5 working sessions, I pivoted.
+
+Not because I thought it couldn't work or because the money wasn't there (it is). Not because it's a saturated space (which it also is). But we'll get into that "why" later. The purpose of this article is to show you the "how". If you're asking yourself, "How can I start an AI Automation company?", I want to show you how I built the foundation from scratch with the help of AI.
+
+This is from the perspective of a "non-technical" person that is seeking to help my kind. Because many tutorials out there are either too broad regarding the capabilities of tools or, well, too technical. I'm not a coder, but I am an AI enthusiast. This walkthrough will show you exactly what I did, for better or for worse, to build a fully functional AI automation agency using AI.
+
+The digital tools you need to start an agency are actually not that complex. Think about what most online, B2B businesses need. A website. An email. A way for clients to book time. With an AI Automation business, of course you would add some sort of AI solution to that. Most think of ChatGPT. But I decided on [Anthropic's](https://www.anthropic.com/) AI model, Claude, for a couple of reasons.
+
+First, Claude's Pro plan has a new feature called [**Claude Cowork**](https://claude.com/product/cowork). I wanted Cowork to be the foundation of what I would set up for clients. This was my approach because Cowork has a very user-friendly interface that allows for very powerful agentic workflows. I'll go into more detail about what Cowork is and how it powered me forward in a minute.
+
+Second, I wanted to work with an AI system that could not only advise on my business but also build my business locally. "Locally" in this case just means on my personal computer. Many don't know this but a website is essentially a group of files and folders. Claude Cowork can access your computer to literally build files and revise the contents within those files. But let's start from square one.
+
+## How Did I Kick This Off?
+
+I knew I wanted to build this business with AI. So, that's where I started. I shared my premise with Claude, with as much relevant context as possible, and tasked it with creating a roadmap for me. Here's the exact prompt I used:
+
+{% prompt-block
+   label="The Roadmap Prompt"
+   prompt="I want to start a business where the goal is to get companies set up with Claude Cowork and Agentic workflows. This, of course, wouldn't be the selling point, but rather, the mechanism to solve a problem for a client. However, in order to solve a wide breadth of potential pain points for clients, I need to be able to deploy multiple agents within Claude Cowork to understand how this platform works and to understand its core strengths. My plan is to use Cowork to build this business. Everything from lead sourcing and scoring, to marketing automation, to sales outreach and scheduling, to actually presenting my personal Cowork as a demo. I want your assistance in guiding me. Where should we start first? You might've noticed that I've already installed several plugins. However, I haven't defined any skills yet. I also do not yet have a brand or a website. When presenting your answer, provide an overall roadmap, but do not expound on each step. We want to take this one step at a time." /%}
+
+When asking any AI model for a solution, it's important to provide as much context as possible. While current AI models are powerful, they are still limited. In fact, quality tends to dip the further you get within a single conversation. Therefore, rather than simply asking AI to create an automation business for you from 0 to 100, it's wise to take things step-by-step and to provide as much background information that you can think of.
+
+This includes what you don't want from the output, what your general idea is, and what you envision around the execution of the idea. This makes the identification of errors much easier. It allows you to review what has been done, confirm or revise the result, and move on to the next task confidently.
+
+Upon receipt of my prompt, the AI agent provided a general roadmap of the build. This, of course, isn't a set-in-stone plan. Things come along that need to get added in between steps. Pivots happen. But here's what it provided:
+
+![AI-generated roadmap showing the phased plan for building the WorkMultiple agency](/blog-images/ai-automation-agency-build/image-mmfeqt6s.png)
+
+Honestly? Not bad. Oversimplified? Yes. But it curbs the anxiety that many who want to start business experience: not knowing where to start.
+
+In Phase 1, I went through a lot of back and forth with my agent in landing on a brand name. From names that came off a little too abstract, to words that translated things like "automation" and "growth" into different languages, I ran the full gamut. But eventually, we landed on WorkMultiple.
+
+![Claude brainstorming brand name options before landing on WorkMultiple](/blog-images/ai-automation-agency-build/image.png)
+
+So now, we have a brand. While the next step on the roadmap was to create a website, I knew beforehand that current AI models aren't great at maintaining quality within a single, long-running conversation. Starting new conversations with separate AI agents as you build a project keeps the quality of output intact. However, each new conversation won't have the background information of the project, what has been accomplished so far, and what is next on the roadmap.
+
+This leads us to our first major takeaway in working with AI tools: you must set your work environment up to easily pass information from session to the next. Rather than repeating the context of the project as you start each new conversation, you want to create a log that future agents can refer back to. In a way, this is automation at work. You are setting up a system that reduces repetitive work.
+
+## Context Is King
+
+When building a project with AI that spans multiple areas, it's important to organize your project in a way that enables your AI agent to work as your partner. For one, AI can most easily read files in a markdown format. You can think of a markdown file as a text file that allows for formatting. Second, it's a good idea to create a project folder on your computer. This folder will hold other folders that serve specific sides of your business. One folder for your website. One for Sales. But the most important folder early on is one that is often overlooked and very underrated: Context.
+
+As previously mentioned, you need a system to easily pass project information from one AI agent to the next. This is where your context folder comes in. Without a context folder (and the context files within it), every session starts from zero. With them, AI works like a team member who remembers the full project history. Here's the prompt I used to create my first context file:
+
+{% prompt-block
+   label="Context File Creation"
+   prompt="Before we move on to the website, I want you to create a context file for this project that will act as a living document for future AI chats and agents to refer back to. This should be housed within the parent WorkMultiple folder and should include the full context of this business that we are starting, the roadmap from now until launch, and anything else that an expert AI Agent Orchestrator would include to allow for seamless handover to future agents. I also want you to provide me with a detailed prompt to provide to the next agent for that agent to build the website on Phase 1, Step 2. This agent will refer to the aforementioned context file." /%}
+
+What followed was a detailed breakdown of the business, including what the business is, what we don't do, context of who I am, the target audience, the services we offer, our positioning, our key differentiators, and our tech stack. This is meant to be a working document which would be revised as things change about the business.
+
+You'll notice that I not only tasked the agent with creating a context file for future agents, but also with creating a prompt to pass on to the next agent. This is a good practice because it provides future agents with information in a way that an AI thinks another AI would best understand it. It also fills any gaps that you might miss when prompting for next steps.
+
+As this build progressed, you'll see here how my Context folder was built over time:
+
+![The Context folder structure showing markdown files used to pass project information between AI agents](/blog-images/ai-automation-agency-build/image-mmfhjc5e.png)
+
+This folder contains markdown files (i.e. files that end with .md) for future agents to refer back to easily.
+
+- The AGENT_INSTRUCTIONS.md file is exactly how it sounds. An AI agent is to read this file to understand how to orient itself, learns the behavioral rules (such as taking one step at a time and asking clarifying questions), and which files to read in which order.
+- The BRAND.md file is an overview of our identity, voice, key messages, and visual direction.
+- The BUSINESS.md file provides all context around the business. This file is the result of the most recent prompt shared.
+- The DECISIONS.md file tracks every change made across sessions. It gets added to by the AI that helped you accomplish a task.
+- The ROADMAP.md file informs the agent of the overall plan for the build, the current focus, and which items are open or completed.
+
+All of these files were created with the assistance of AI. Can't think of which context files should be created? Ask AI. Need help starting a new session to accomplish the next step on the roadmap? Ask AI. These practices alone will move you from simply being an AI user to being an *AI Agent Orchestrator*.
+
+## Building The Website
+
+Because the next step on our roadmap was to build a website, this is what my first agent session prompted around. Here is the full prompt that our first agent created, which was received by our next agent:
+
+{% prompt-block
+   label="Prompt"
+   prompt="# Website Agent Handover Prompt\n\n> **What this is:** A ready-to-paste prompt for the next Claude Cowork session (or any AI agent) to build the WorkMultiple website. Copy everything below the line and paste it as your opening message.\n\n---\n\n## Prompt\n\nYou are helping me build the website for WorkMultiple, my done-for-you AI agency. This is Phase 1, Step 2 of our roadmap.\n\n**Before doing anything else, read these two files in order:**\n\n1. `WorkMultiple/PROJECT_CONTEXT.md` — This is the master context file for the entire business. It contains the brand overview, target audience, voice guidelines, roadmap, decisions made so far, and instructions for how you should operate as an agent on this project.\n\n2. `WorkMultiple/01 - Brand/Brand Foundation.md` — This contains the brand name, positioning statement, tagline, voice principles, key messages, and competitive differentiation.\n\n**After reading both files, here's your task:**\n\nBuild a single-page landing website for WorkMultiple. This is a launch-ready landing page — not a full multi-page site. The goal is to clearly communicate what WorkMultiple does, who it's for, and give visitors a way to get in touch.\n\n### Requirements\n\n**Page structure (top to bottom):**\n\n1. **Navigation:** Logo (text-based for now: \"WorkMultiple\") + a single CTA button (e.g., \"Get Started\" or \"Book a Call\")\n2. **Hero section:**\n   - H1: \"More done. Same team.\"\n   - H2: Needs to complete the phrase \"Multiply your workforce with AI agents that [X].\" Refer to the open item in PROJECT_CONTEXT.md — present me with 2-3 refined options before building. The H2 should convey that agents handle complex work (not just busywork) and deliver tangible business outcomes.\n   - CTA button\n3. **Problem section:** 2-3 short pain points that resonate with SMBs (10-100 employees). Reference the target audience section of the context file.\n4. **How it works:** 3-step process (simple, visual). Something like: Audit → Build → Run.\n5. **What we deploy (services/use cases):** Brief descriptions of the types of agentic workflows we set up. Examples: operations automation, sales pipeline, marketing workflows, reporting, onboarding. Keep it outcome-focused per the voice principles.\n6. **Differentiator section:** Why WorkMultiple is different. Key point: we use the same tools on ourselves. Our business IS the demo.\n7. **Social proof / trust placeholder:** We don't have testimonials yet. Design a section that can hold them later. For now, consider a \"Built on Anthropic's Claude\" trust badge or a short founder credibility statement.\n8. **CTA section:** Final call to action before the footer. Reinforce the tagline.\n9. **Footer:** Logo, email, links placeholder, copyright.\n\n**Design direction:**\n- Clean, modern, professional. Not flashy or over-designed.\n- Think: Stripe, Linear, Vercel — confident and minimal.\n- Dark or light theme is fine, but it should feel premium, not generic.\n- Mobile responsive.\n- Use a system font stack or Google Fonts (Inter, DM Sans, or similar).\n- No stock photography. Use whitespace, typography, and subtle geometric elements.\n\n**Technical requirements:**\n- Single HTML file with inline CSS and JS (no external dependencies beyond fonts).\n- No framework needed — vanilla HTML/CSS/JS is fine.\n- The CTA buttons should link to `email hidden for privacy` as a placeholder until we set up a booking tool.\n- Must be responsive (mobile-first).\n- Semantic HTML, accessible.\n\n**Voice and copy:**\n- Follow ALL voice principles from the Brand Foundation document.\n- Lead with outcomes, not technology.\n- Be direct. No fluff.\n- Make AI feel normal, not intimidating.\n- Do NOT use jargon like \"agentic frameworks,\" \"LLMs,\" \"multi-step reasoning,\" etc.\n\n**Before building, ask me:**\n1. Your 2-3 refined options for the hero H2.\n2. Whether I want dark or light theme.\n3. Any other clarifying questions you have after reading the context files.\n\n**When finished:**\n- Save the HTML file to `WorkMultiple/02 - Website/index.html`\n- Create the `02 - Website/` folder if it doesn't exist.\n- Update `PROJECT_CONTEXT.md`: mark Step 2 as COMPLETE, add any new decisions to the log, and update open items.\n- Show me the result and ask for feedback before considering it done.\n" /%}
+
+Pretty detailed, right? When most think about prompting with AI, rarely do these messages go longer than a paragraph. But the less information you provide, the more assumptions AI will need to make. This often can trap you in a loop of back-and-forth revisions which will eat into your allotted usage. Don't get me wrong. Revisionary dialogue and custom tweaking is inevitable. But it reduces it. Here's what the initial site looked like after executing on this prompt:
+
+{% video-embed
+   src="/blog-videos/ai-automation-agency-pivot/site-design-recording.webm"
+   alt="Recording of the initial WorkMultiple website built by AI" /%}
+
+Pretty bare-bones, but it produced a good foundation. Our agent created a working landing page with calls-to-action, a three-card value prop section, a three-step process section, a services section, and a competitive comparison section, and a closing CTA. The layout maintained a logical flow and a balance between education and lead capture.
+
+After building the foundation of the website, I bought the domain workmultiple.com on porkbun.com, elected to host this project on [Netlify](https://www.netlify.com/) for free, and set it live. I decided on [Porkbun](https://porkbun.com/) as the registrar and Netlify as the host with recommendations from AI. I set up email and booking with [Google Workspace](https://workspace.google.com/), had AI create a simple favicon, and also used AI to build both Privacy and Terms pages.
+
+At this point, I had a brand, a website, a way for potential clients to book calls with me, and an email address with a custom domain to receive inquiries. Technically, outreach could begin at this point. But there was much more work to be done.
+
+## Defining The Audience
+
+When I first thought of this idea, I initially wanted to target broadly, then niche down when I had data to support granular targeting. However, as a single operator, I quickly realized the uphill battle I was about to embark on. I would be competing against much larger agencies that have more experience in creating these automations. I needed to specialize not only to position myself as a targeted solution to a specific industry, but also to be able to solve repeatable problems. Clients of the same industry are bound to have similar problems and may use the same tools. This allows for a repeatable workflow and streamlined builds.
+
+I began the audience refinement process with AI. Initially, I was targeting businesses between 10-100 employees, anywhere between $1M-30M in annual revenue, US-based, and four primary verticals where this service might fit best: professional services, e-commerce/DTC, real estate, and growth-stage SaaS. These qualifications are quite broad. As a test, I had my agent perform a quick lead scrape with these specifications in mind. It returned mixed results.
+
+Some companies were way too large. Others came without a clear point of contact or email. Then, there were the SaaS companies. I started thinking, "Why would a team of technical professionals hire a non-technical person to perform automations that they likely could do themselves?" Sure, there's the idea that you would be saving them time. But the prospect selling AI-native professionals on an AI-integrated solution felt redundant.
+
+Little did I know, I was about to go down a rabbit hole. Here's the prompt that kickstarted that:
+
+{% prompt-block
+   label="Audience Refinement"
+   prompt="Before we move on to commands, I want you to review the BUSINESS.md file and update it with who our target audience is based on the context you have received from my past sessions. For example, it currently lists SMBs between 10-100 employees. I want to narrow this scope and target smaller businesses that are not SaaS, but do operate their businesses online and could use digital automation. Law offices, property management companies, small businesses that offer high-ticket in-person services (like home renovation) all make sense to me; I want examples like this. It could even be entrepreneurs with a small team. But the larger a company gets, the more we should stray from trying to reach founders and CEOs, and more towards leaders of specific teams. We want to avoid companies that may be tech forward or have an internal person that is either already thinking of deploying these automations internally or is capable of deploying these systems. In addition to updating any context files that need updating (which you should read through to make sure this is consistent across all context files), update the ICP Builder skill to reflect this. In terms of pricing, determine if our tiered pricing levels still hold up against what our target audience would be willing to pay. My goal is to offer value. I want this to reflect a \"grand slam offer\" as referenced in Alex Hormozi's book, $100M Offers. It should be an offer that is so good that a business would be dumb to say no to." /%}
+
+You might have noticed that I mention pricing. An early version of pricing structure was determined as a tiered system. I worked with AI to determine an acceptable structure that included the following:
+
+- **Stage 1, Discovery Call** (free, already live): qualifies the prospect and books the audit.
+- **Stage 2, Workflow Audit** ($1,500 standard / $2,500 extended): the paid entry point. Low-risk for the client, proves you understand their business. Audit fee credits toward the build if they move forward within 30 days.
+- **Stage 3, Agent Build** ($2,500 standard / $4,500 advanced / $6,000+ custom): per-agent pricing. Includes build, testing, deployment, team walkthrough, and 14 days of post-launch support. 15% bundle discount for 3+ agents.
+- **Stage 4, Optional Retainer** ($750/month maintenance / $1,500/month growth): month-to-month, no lock-in. The Growth tier includes one new standard agent build per quarter, which makes the math very compelling for clients who want to keep expanding.
+
+Upon receipt of my prompt indicating that I wanted to refine my audience, my agent asked me a series of questions. What's the employee range for the narrowed target? I said 2-25 employees. Are you open to restructuring the pricing model entirely? I said yes. The current ICP lists 4 industries; should I replace it with specific verticals you mentioned? It was here that my agent recommended a two tier system:
+
+![AI-recommended two-tier pricing system for the agency offering](/blog-images/ai-automation-agency-build/image-mmgyoh6k.png)
+
+Personally, I wasn't crazy about this approach. This brings me to my next point. Your intuition matters. Just because an AI presents you with a plan does not mean it has to be the final say. You can present your thoughts to AI to get further analysis. Here's a prompt that shows how I brought my own analysis to the table:
+
+{% prompt-block
+   label="Audience Refinement"
+   prompt="The industry analysis feels right, but I do have a question for you: do you think we should narrow scope even further? I'm wondering if we should be hyper-focused to serve a specific customer to prove authority and to gain experience and solve consistent problems within that industry (which we would learn with experience). A home renovation company and a law firm are bound to have different problems to solve for. I wonder if we start narrow and then expand as we gain experience and testimonials. Different industries down the line could have their own brand in the future. It could also ease competition by further niche-ing down. Or would you recommend we keep the target audience broad at ~3 industries?" /%}
+
+In this prompt, I'm indicating that I am leaning in a particular direction and I present my rationale. However, I'm also giving the agent room to make its own recommendation to avoid having the agent blindly agree with me.
+
+After receiving affirmation from my agent and considering several paths for a singular audience, I then went to another AI platform outside of this workflow: [Gemini 3 Pro](https://gemini.google.com/). Up until this point, all of my work was being done through Claude's model, Opus. It is great at complex workflows. But I've found that getting input from a model that was produced by another model can lead to better results. While Opus recommended targeting Home Services (HVAC, renovation and remodeling, plumbing, electrical, roofing, etc.), Gemini 3 Pro refined this further. Our target audience was now **High-Ticket Specialized Contractors**. Think custom home builders, commercial HVAC, and high-end remodeling.
+
+## Why this audience?
+
+For one, AI solutions or agencies already exist for many of the niches we considered. Our target audience is also less likely to either be more computer savvy or be more inclined to spend time on cleaning up administrative and operational systems. But they check many boxes.
+
+These contractors usually operate with a tight crew of 5 to 25 people, but rely on just 1 to 3 staff members to handle all administration, quoting, and customer communication. That's a bottleneck. Speaking to the tech savviness piece, this audience often runs operations on whiteboards, scattered PDFs, cluttered email inboxes, and perhaps a legacy CRM.
+
+They're also underserved. Existing products don't automate the manual drudgery of sorting through local files and supplier emails. They can also be too complex for smaller outfits. And lastly, there is massive ROI. Their ticket sizes are high and recovering a single lost lead or eliminating a billing bottleneck can mean tens of thousands of dollars in found revenue.
+
+## Claude Cowork As The Foundation
+
+When I first learned about Claude Cowork, my eyes widened. I've built AI-integrated automated workflows through [n8n](https://n8n.io/) before. I've also tried more technical frameworks like [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview). But Claude Cowork was different. Cowork allows for automations that are built on top of prompts. Other automation platforms require some level of technical implementation. Even if you use AI to guide you in building a workflow, it becomes pretty time consuming.
+
+This is where I saw the opportunity. Many businesses want to use AI but aren't sure where to start. More than that, they may not have the time or resources to learn how to become proficient. Cowork allows for businesses to benefit from AI with an easy way to manage it after the fact. No need to learn how to build and connect nodes in n8n. No need to learn what LangGraph is or know how to build custom agents in Python. With Cowork, automations are built in an easy-to-understand user interface. Let me introduce you to **Plugins**:
+
+{% video-embed
+   src="/blog-videos/ai-automation-agency-pivot/cowork-plugins.webm"
+   alt="Claude Cowork Plugins" /%}
+
+Think about how we traditionally use AI. Usually, we'll ask a chatbot a question, it gives us text, and we go do the work.
+
+Claude Cowork is a **digital coworker** that works for you directly on your computer. A plugin is something like an onboarding kit for a new employee. Anthropic (the makers of Claude) includes pre-packaged plugins with every Claude Cowork instance. These plugins are meant to serve specific areas of business such as marketing, sales, legal, and human resources. With plugins, you are handing Claude a bundle of tools and instructions so it can start doing that specific job.
+
+A plugin typically bundles four things together:
+
+- **Skills:** This is the "employee handbook." It teaches Claude the domain expertise, best practices, and step-by-step workflows required for that specific role.
+- **Connectors:** These are the "login credentials." Connectors wire Claude directly into the software your business already uses, such as Slack, HubSpot, Jira, or Google Workspace.
+- **Commands:** These are shortcut triggers (like typing `/marketing:campaign-plan`) that instantly launch complex, pre-programmed tasks without requiring you to write a massive prompt.
+- **Sub-agents:** These are specialized "mini-workers." If you ask Claude to research 50 different files, it will spin up a sub-agent to do the heavy reading in the background so your main workspace doesn't get cluttered.
+
+I'll go into the capabilities and use cases of Claude Cowork in a future, detailed post. For now, you can think of Cowork like this: instead of prompting an AI step-by-step, you're giving an agent a final goal. The agent will independently figure out the plan, access the files, synthesize the data, and deliver on your goal. It can work across apps and complete a full workflow.
+
+For example, a Sales agent can research a prospect on the web, pull context from your CRM, draft a personalized outreach email, and send a notification to your team on Slack. And they're consistent. Because plugins lock in your specific processes, you don't have to rely on every employee writing the perfect prompt. The agent executes workflows exactly how your company wants them done, every single time.
+
+Pretty powerful stuff, right? You can see how this could be an attractive offer for a client. My idea was to use my own business as my demo. To show the benefits of this platform and how I can build the same thing for a client. But, it's not yet perfect. Anthropic currently only offers a limited amount of connectors to Claude Cowork, which can be a roadblock if you are trying to build the entire business on top of Cowork. What happens when your client uses a platform that doesn't natively integrate with Claude? Well, you'll have to use another automation solution. Before you know it, you're doing more manual work than you initially expected.
+
+## The Pivot
+
+At this point, I had a brand, a website, a micro-niche target audience, pricing structure (we ended up restructuring the offer to be an all-in for $4,500 model; tons of value at one price), an AI agentic architecture to do the heavy lifting, and an offer. The plan was in place and was created over the span of 5 working days at about 3 hours of work per day.
+
+I started to think about all the projects I've worked on in my career. Sometimes, a single, simple project could take weeks because of red tape, coordinating across teams, approval from management, revisions, the list goes on. Standing up a Minimum Viable Product as a ready-to-use business took the equivalent of a week at a part-time job.
+
+So why am I not pursuing this business? Simply put, I would rather first focus my time on sharing my knowledge and learnings with others. Tinkering and building. Sharing practical use cases that can help white-collar workers in a world where we are increasingly at risk of being replaced. This isn't me trying to fear monger; it's just the reality at hand. For many of us, we either learn to automate or we get automated.
+
+Scary scenarios aside, if you made it this far, I hope this was helpful. I plan on sharing more tests and practical use cases in the future, so if you would like to receive custom built automations in your inbox, please consider subscribing to my newsletter. Also, if you have any questions about this build or about scaling up your AI knowledge in general, please feel free to hit me up at emilio@workmultiple.com.
+
+Build on!

@@ -7,8 +7,9 @@ import { getCollection } from 'astro:content';
 let posts: any[] = [];
 try {
   const allPosts = await getCollection('blog');
+  const isDev = import.meta.env.DEV;
   posts = allPosts
-    .filter((post) => post.data.status === 'published')
+    .filter((post) => isDev || post.data.status === 'published')
     .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 } catch {
   // No posts yet

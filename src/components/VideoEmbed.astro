@@ -1,0 +1,213 @@
+---
+interface Props {
+  src: string;
+  alt?: string;
+}
+
+const { src, alt = '' } = Astro.props;
+---
+
+<figure class="video-embed">
+  <div class="video-wrapper">
+    <video
+      class="video-player"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-label={alt}
+    >
+      <source src={src} type={src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+    </video>
+
+    <div class="video-overlay">
+      <svg class="play-icon" width="48" height="48" viewBox="0 0 24 24" fill="white">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>
+
+    <div class="video-controls">
+      <button class="video-btn video-pause" aria-label="Pause video" type="button">
+        <svg class="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="4" width="4" height="16"/>
+          <rect x="14" y="4" width="4" height="16"/>
+        </svg>
+        <svg class="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+      <button class="video-btn video-fullscreen" aria-label="Fullscreen" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 3 21 3 21 9"/>
+          <polyline points="9 21 3 21 3 15"/>
+          <line x1="21" y1="3" x2="14" y2="10"/>
+          <line x1="3" y1="21" x2="10" y2="14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  {alt && <figcaption class="video-caption">{alt}</figcaption>}
+</figure>
+
+<script is:inline>
+  (function() {
+    // Find all video embeds that haven't been initialized yet
+    document.querySelectorAll('.video-embed:not([data-init])').forEach(function(container) {
+      container.setAttribute('data-init', 'true');
+
+      var video = container.querySelector('.video-player');
+      var overlay = container.querySelector('.video-overlay');
+      var pauseBtn = container.querySelector('.video-pause');
+      var fullscreenBtn = container.querySelector('.video-fullscreen');
+      var iconPause = container.querySelector('.icon-pause');
+      var iconPlay = container.querySelector('.icon-play');
+
+      if (!video || !pauseBtn || !fullscreenBtn) return;
+
+      function updateIcons() {
+        if (video.paused) {
+          iconPause.style.display = 'none';
+          iconPlay.style.display = 'block';
+          overlay.classList.add('visible');
+        } else {
+          iconPause.style.display = 'block';
+          iconPlay.style.display = 'none';
+          overlay.classList.remove('visible');
+        }
+      }
+
+      // Click video to pause/play
+      video.addEventListener('click', function() {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      // Pause button
+      pauseBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      // Fullscreen
+      fullscreenBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        }
+      });
+
+      video.addEventListener('play', updateIcons);
+      video.addEventListener('pause', updateIcons);
+
+      // Scroll-based autoplay/pause
+      var observer = new IntersectionObserver(
+        function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              video.play();
+            } else {
+              video.pause();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(video);
+    });
+  })();
+</script>
+
+<style>
+  .video-embed {
+    margin: 2rem 0;
+  }
+
+  .video-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--color-border, #27272a);
+    box-shadow: var(--shadow-md);
+    background: var(--color-surface, #121214);
+  }
+
+  .video-player {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+  }
+
+  /* Paused overlay */
+  .video-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .video-overlay.visible {
+    opacity: 1;
+  }
+
+  .play-icon {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  }
+
+  /* Bottom controls */
+  .video-controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .video-wrapper:hover .video-controls {
+    opacity: 1;
+  }
+
+  .video-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    padding: 0;
+  }
+
+  .video-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .video-caption {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted, #71717a);
+    text-align: center;
+    font-style: normal;
+  }
+</style>
