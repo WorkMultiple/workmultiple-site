@@ -1,4 +1,5 @@
 import { config, fields, collection } from '@keystatic/core';
+import { block } from '@keystatic/core/content-components';
 
 export default config({
   storage: { kind: 'local' },
@@ -55,7 +56,45 @@ export default config({
             image: {
               directory: 'public/blog-images',
               publicPath: '/blog-images/',
+              transformFilename: (originalFilename: string) => {
+                const ext = originalFilename.match(/\.[^.]+$/)?.[0] || '.png';
+                const base = originalFilename.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9-_]/g, '-');
+                const id = Date.now().toString(36);
+                return `${base}-${id}${ext}`;
+              },
             },
+          },
+          components: {
+            'video-embed': block({
+              label: 'Video Embed',
+              description: 'Embed a video that autoplays when scrolled into view',
+              schema: {
+                src: fields.text({
+                  label: 'Video path',
+                  description: 'Path to the video file (e.g. /blog-videos/my-post/recording.webm)',
+                }),
+                alt: fields.text({
+                  label: 'Caption (optional)',
+                  description: 'Descriptive caption shown below the video',
+                }),
+              },
+            }),
+            'prompt-block': block({
+              label: 'Prompt Block',
+              description: 'A copyable prompt block for sharing AI prompts with readers',
+              schema: {
+                label: fields.text({
+                  label: 'Label',
+                  defaultValue: 'Prompt',
+                  description: 'Label shown above the prompt (e.g. "Prompt", "System Prompt", "Try this")',
+                }),
+                prompt: fields.text({
+                  label: 'Prompt text',
+                  multiline: true,
+                  description: 'The full prompt text. Supports markdown formatting.',
+                }),
+              },
+            }),
           },
         }),
       },

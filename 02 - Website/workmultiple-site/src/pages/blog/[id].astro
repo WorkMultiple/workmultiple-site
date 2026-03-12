@@ -7,8 +7,9 @@ import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
+  const isDev = import.meta.env.DEV;
   return posts
-    .filter((post) => post.data.status === 'published')
+    .filter((post) => isDev || post.data.status === 'published')
     .map((post) => ({
       params: { id: post.id },
       props: { post },
@@ -24,7 +25,18 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout title={`${post.data.title} | WorkMultiple`} description={post.data.description}>
+<BaseLayout
+  title={`${post.data.title} | WorkMultiple`}
+  description={post.data.description}
+  ogImage={`/images/cards/${post.id}.png`}
+  ogType="article"
+  articleSchema={{
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.date,
+    author: post.data.author,
+  }}
+>
   <Header />
 
   <article class="blog-post">
@@ -196,6 +208,78 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
     margin: 2rem 0;
     border: 1px solid rgba(255,255,255,0.05);
     box-shadow: var(--shadow-md);
+  }
+
+  /* Comparison tables */
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .post-content :global(thead) {
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+  }
+
+  .post-content :global(th) {
+    padding: 0.875rem 1.25rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+  }
+
+  .post-content :global(th:not(:last-child)),
+  .post-content :global(td:not(:last-child)) {
+    border-right: 1px solid var(--color-border);
+  }
+
+  .post-content :global(td) {
+    padding: 0.75rem 1.25rem;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+
+  .post-content :global(tr:last-child td) {
+    border-bottom: none;
+  }
+
+  .post-content :global(tbody tr) {
+    background: var(--color-bg);
+    transition: background 0.15s ease;
+  }
+
+  .post-content :global(tbody tr:hover) {
+    background: var(--color-surface);
+  }
+
+  .post-content :global(td strong),
+  .post-content :global(th strong) {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .post-content :global(table) {
+      font-size: 0.85rem;
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .post-content :global(th),
+    .post-content :global(td) {
+      padding: 0.625rem 0.875rem;
+      min-width: 120px;
+    }
   }
 
   /* Share buttons */

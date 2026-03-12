@@ -1,181 +1,256 @@
 # WorkMultiple - Content Strategy
 
-> **How we create, publish, and distribute content.** This file defines the content engine that drives organic traffic, affiliate revenue, and playbook sales.
+> **How we create, publish, and distribute content.** This file defines the content engine that drives organic traffic, affiliate revenue, and (eventually) playbook sales.
 
 ---
 
-## Writing Collaboration Model
+## Two-Track Content Model
 
-**All article copy is written by Emilio, not AI.** Readers must trust that the content is authentic and human-written. AI-generated articles would undermine the credibility that WorkMultiple's content is designed to establish.
+WorkMultiple produces content on two tracks with different authorship, voice, quality bars, and cadence.
 
-**How we collaborate on each article:**
+### Track A: Emilio Originals (1-2 per month)
 
-1. **Outline:** Agent reviews source materials (WM_Legacy, research, etc.) and collaborates with Emilio on the article structure and outline.
-2. **Draft:** Emilio writes the full draft, including capturing screenshots and providing the narrative voice.
-3. **Edit and optimize:** Agent handles SEO optimization (schema markup, meta descriptions, keyword placement, Open Graph tags), screenshot styling (drop shadows, on-brand visual treatment), headline formatting, and internal/external linking recommendations.
-4. **Format and publish:** Agent formats the draft as Markdown for the Astro content collection, adds frontmatter, and prepares for deployment. Emilio reviews the final version before publish.
+Personal deep-dive builds where Emilio tests a tool, builds something real, and documents it. These are the credibility anchors for the brand.
 
-**What the agent does NOT do:** Write article copy, rewrite Emilio's voice, or generate prose for publication. The agent's role is structural, technical, and optimization-focused.
+**Author:** Emilio Villareal
+**Voice:** First-person narrative ("I built...", "I tested...")
+**Quality bar:** Hands-on testing, screenshots, video demos, exact prompts and settings. Implementation-ready.
+**Cadence:** 1-2 per month, as opportunities arise. These take 2-3+ days each. Emilio is not the bottleneck; these publish when they're ready.
+**Examples:** Article 1 ("I Built an AI Automation Agency in 15 Hours") is the template. Future originals could cover a specific tool deep-dive, a real business problem solved end-to-end, or a workflow automation build.
+**Role of AI:** Collaborates on outline, handles SEO optimization, screenshot styling, formatting, and publish prep. Does not write or rewrite article prose.
 
----
+### Track B: Content Engine (3-5 per week)
 
-## The Content Engine
+AI-generated, research-based articles targeting commercial-intent search queries. These drive organic traffic and carry affiliate links (once programs are approved). Emilio reviews every draft before publish but does not write the copy.
 
-WorkMultiple's content serves three purposes:
+**Author:** WorkMultiple
+**Voice:** Brand voice (first-person plural "we" or neutral third-person). Direct, opinionated where warranted, no personal narrative.
+**Quality bar:** Thoroughly researched, accurate, and genuinely useful. Deeper and more specific than generic "Top 10" content. When we have hands-on experience with a tool, we say so. When we don't, we're transparent about the basis of our assessment.
+**Cadence:** 3-5 articles per week, produced in weekly batches.
+**Content types (in priority order):**
 
-1. **Drive organic traffic** through SEO-optimized articles that rank for terms non-technical business owners are searching for.
-2. **Build authority** by publishing opinionated, tested, practical content that the generic "Top 10" sites can't match.
-3. **Funnel readers to paid playbooks** by solving part of a problem in a free article and offering the full implementation in the premium playbook.
+1. **Single-tool profiles:** Deep informational pages on what a tool does, pricing, who it's for, strengths, weaknesses, and alternatives. These also serve as future entries for the tool directory page.
+2. **Tool-vs-tool comparisons:** Head-to-head comparisons for specific use cases ("X vs Y for [task]").
+3. **Category roundups:** "Best AI tools for [specific use case]." Opinionated, with a clear recommendation.
+4. **How-to guides featuring specific tools:** Practical tutorials centered on a tool's capabilities.
 
----
+**Scope:** AI/automation tools are the primary focus, but tools with AI-integrated features in adjacent categories (project management, CRM, email marketing, etc.) are in scope.
 
-## Launch Content (Phase 2: First 3 Articles)
+### How the Two Tracks Work Together
 
-Before the first playbook goes on sale, WorkMultiple publishes 3 high-quality articles that establish authority and build an initial audience. Three is the target, not more. Quality matters more than volume, and content quantity must not become a bottleneck that delays the playbook launch.
+Emilio Originals provide tested credibility that no pure AI content site can match. Content engine articles provide the volume and SEO coverage needed to drive traffic and affiliate revenue. The combination is the differentiator: a content library that is both deep (originals) and wide (engine).
 
-Articles are published and measured organically first. Community distribution happens selectively after engagement signals confirm the content is resonating. See the "Distribution Philosophy" section below for the full approach.
-
-### Article 1: The Pivot Story
-
-**Title concept:** "How I built an entire AI automation agency and why I stopped before signing a single client."
-
-This is the first piece published and the first piece distributed. It is authentic, establishes credibility, and is a natural fit for Indie Hackers, r/entrepreneur, r/SideProject, and Twitter/X. It covers what was built (ICP, pricing, sales process, plugin architecture), why the model didn't fit, and what came next. It naturally leads to the first playbook by demonstrating the depth of work that went into the agency build.
-
-**Content type:** Workflow Breakdown / Authority Content.
-**SEO value:** Low (personal narrative, not keyword-driven). Primary value is community distribution and credibility.
-**Playbook connection:** Direct lead-in to "How to Build a Done-for-You AI Automation Agency."
-
-### Article 2: Tool Comparison or Workflow Breakdown
-
-Drawn directly from the agency build research. Something tested, opinionated, and practical. Targets SEO and includes affiliate links where appropriate.
-
-**Content type:** Tool Comparison or Automation Tutorial.
-**SEO value:** High (commercial-intent keyword targeting).
-**Playbook connection:** Should relate to a tool or workflow covered in the first playbook.
-
-### Article 3: Second Tool Comparison or Tutorial
-
-Also derived from existing knowledge. Each article should have a natural connection to the upcoming playbook.
-
-**Content type:** Tool Comparison or Automation Tutorial.
-**SEO value:** High.
-**Playbook connection:** Same as Article 2.
+Internal linking connects the two tracks. A content engine article about a tool can reference an Emilio Original that tested it. An Emilio Original can link to related content engine articles for tools mentioned in passing.
 
 ---
 
-## Types of Free Content (Ongoing)
+## Weekly Content Production Workflow
 
-### Tool Comparisons (Primary SEO Play)
+### How a Content Engine Batch Gets Produced
 
-Head-to-head comparisons of AI tools for specific business use cases. These are the highest-value content pieces because they target commercial-intent search queries and naturally include affiliate links.
+1. **Topic selection:** At the start of each week, identify 3-5 tools or topics to cover. Selection is based on: keyword opportunity (search volume + low competition), affiliate program availability, relevance to the WorkMultiple audience, and natural internal linking opportunities. Emilio and AI collaborate on topic selection; Emilio can also assign specific topics.
+2. **Research and drafting:** For each topic, AI conducts web research (product pages, documentation, pricing, reviews, competitor comparisons) and produces a complete draft as a Markdoc file with frontmatter, SEO metadata, and proper formatting for the Astro blog.
+3. **Weekly review spreadsheet:** All drafted articles are compiled into a spreadsheet delivered to Emilio at a consistent time each week. Each row contains: article title, target keyword, draft link, and a status column (Pending Review / Approved / Needs Revision / Rejected).
+4. **Emilio reviews:** Emilio clicks each draft link, reads the content, and marks the status in the spreadsheet. For articles that need revision, Emilio adds notes in a comments column.
+5. **Publish:** Approved articles are formatted for the Astro content collection, placed in the correct directory structure, and prepared for deployment. The goal is a one-click (or near one-click) publish from the spreadsheet.
 
-**Format:** "I tried [Tool A] vs [Tool B] vs [Tool C] for [specific task]. Here's what actually worked."
+### Cowork Automation Skills (To Build)
 
-**Examples:**
-- "I tested 4 AI tools for automating client follow-up. Here's what worked."
-- "Claude vs ChatGPT vs Gemini for building business workflows: a practical comparison."
-- "The best AI writing tools for small business owners who hate writing."
+The following Cowork skills and scheduled tasks support this workflow:
 
-**Quality bar:** Every tool mentioned must be personally tested. No secondhand reviews. Include screenshots, specific results, and a clear recommendation.
+1. **Article Drafting Skill:** Takes a tool name or topic, conducts web research, and produces a complete Markdoc draft with frontmatter, SEO metadata, affiliate link placeholders, and formatting for the Astro blog content collection.
+2. **Weekly Content Batch (Scheduled Task):** Runs on a set schedule (e.g., every Monday morning). Generates the week's batch of 3-5 drafts using the Article Drafting Skill and produces the review spreadsheet with links to each draft.
+3. **Publish Prep Skill:** Takes an approved draft, places it in the correct `src/content/blog/[slug]/` directory, generates any needed assets, and prepares for a git push to deploy.
 
-### Automation Tutorials (Depth Content)
-
-Step-by-step walkthroughs of specific automation workflows. These are longer-form content pieces that demonstrate expertise and naturally lead to playbook upsells.
-
-**Format:** "How to set up [specific automation] using [tool] in under [timeframe]."
-
-**Examples:**
-- "How to automate your weekly business reporting in 90 minutes."
-- "Setting up AI-powered email follow-ups that don't sound robotic."
-- "How to build a content calendar that runs itself."
-
-**Quality bar:** Implementation-ready, but stops short of the full playbook depth. The free tutorial solves the core problem; the playbook covers edge cases, advanced configurations, and troubleshooting.
-
-### Workflow Breakdowns (Authority Content)
-
-Behind-the-scenes looks at how WorkMultiple builds its own systems. These establish credibility and make the brand real.
-
-**Format:** "How we [built/automated/solved specific thing] and what we learned."
-
-**Examples:**
-- "How I built a complete sales pipeline using Claude Cowork (and why I stopped)."
-- "The exact system I use to test and review AI tools."
-- "What I learned building an AI automation agency (and why I pivoted to playbooks)."
+These are built incrementally. The Article Drafting Skill is the first priority. The scheduled task and publish skill follow once drafting quality is validated.
 
 ---
 
-## SEO Approach
+## Content Engine Article Types (Detailed)
 
-**Target keywords:** Focus on long-tail, commercial-intent queries that non-technical business owners actually search for. Not "AI tools" (too broad, too competitive) but "best AI tool for automating client follow-up emails" (specific, actionable, lower competition).
+### Single-Tool Profiles
 
-**Keyword research:** Should inform playbook topics after the first one. Identify what non-technical founders and entrepreneurs are actively searching for related to AI automation, workflow optimization, and AI tool implementation.
+The primary content type. Each profile is a comprehensive page about one tool.
 
-**On-page SEO basics:**
-- Clear H1 with target keyword
-- Meta description that sells the click
-- Internal links between related articles and to playbook sales pages
-- Alt text on screenshots and images
-- Fast page load (Netlify handles this well)
+**Structure:**
+- What the tool does (plain language, no marketing fluff)
+- Who it's for (specific use cases and user types)
+- Key features (the ones that matter, not an exhaustive feature list)
+- Pricing breakdown (tiers, what you get at each level, hidden costs)
+- Strengths (be specific)
+- Weaknesses (be honest; this is what differentiates us from the tool's own marketing)
+- Alternatives (with links to our profiles/comparisons where they exist)
+- Verdict (clear, opinionated recommendation on who should and shouldn't use this tool)
 
-**Content velocity:** Quality over quantity. One well-researched, tested article per week is better than three thin posts. Aim for 1 to 2 pieces per week once the engine is running.
+**SEO targeting:** "[Tool name] review," "what is [tool name]," "[tool name] pricing," "[tool name] alternatives."
+
+**Affiliate connection:** Each profile includes an affiliate link (when available) as a natural CTA: "Try [tool] free" or "See [tool] pricing."
+
+### Tool-vs-Tool Comparisons
+
+Head-to-head comparisons for a specific task or use case.
+
+**Structure:**
+- The specific problem or task being solved
+- Brief intro to each tool (with links to full profiles)
+- Side-by-side comparison on the dimensions that matter for this use case
+- Clear winner with reasoning
+- "Choose X if... Choose Y if..." decision framework
+
+**SEO targeting:** "[Tool A] vs [Tool B]," "[Tool A] vs [Tool B] for [use case]."
+
+### Category Roundups
+
+"Best tools for [specific use case]" articles.
+
+**Structure:**
+- The problem or workflow being addressed
+- Selection criteria (how and why these tools were chosen)
+- Each tool with a brief assessment (links to full profiles)
+- Clear top pick with reasoning
+- Runner-up and budget picks
+
+**SEO targeting:** "Best AI tools for [use case]," "best [category] tools for small business."
+
+### How-To Guides Featuring Tools
+
+Practical tutorials centered on accomplishing a specific task using specific tools.
+
+**Structure:**
+- The problem being solved
+- Tool(s) used and why
+- Step-by-step walkthrough
+- Expected results
+- Troubleshooting common issues
+
+**SEO targeting:** "How to [accomplish task] with [tool]," "how to automate [process]."
 
 ---
 
-## How Free Content Funnels to Paid Playbooks
+## Tool Directory Page (Future: ~6 Weeks Out)
 
-Every article should have a natural connection to a relevant playbook. The connection is contextual, not forced:
+Once 20-30 tools have been profiled in content engine articles, build a dedicated tool directory page on the site. This page aggregates all reviewed tools with short profiles, category tags, and links to the full article.
 
-- A tool comparison article about follow-up automation tools links to the playbook that walks through full implementation.
-- A tutorial on setting up basic reporting links to the playbook covering advanced reporting with dashboards and alerts.
-- A workflow breakdown about the agency build links to the "How to Build an AI Agency" playbook.
+**How it differs from futuretools.io:** Deeper individual profiles, opinionated assessments (not just listings), and clear recommendations. Each directory entry links to the full WorkMultiple article, not just the tool's website.
 
-**Placement:** In-content callouts (not pop-ups, not aggressive banners). A brief section like: "Want the full implementation? The [Playbook Name] covers [what's included] with exact steps, prompts, and troubleshooting." Plus a link.
+**SEO value:** The directory page targets broad category searches ("AI tools for business," "automation tools directory") while individual articles target specific tool and comparison queries. Together they create an internal linking web that boosts both.
+
+**Affiliate value:** Each directory entry includes an affiliate link (when available) alongside the link to the full article. Two touchpoints for conversion.
+
+**Build sequence:** Publish content engine articles for 4-6 weeks (building up 20-30 tool profiles), then build the directory page and backfill all reviewed tools. As affiliate programs approve, add links to both the directory entries and the articles.
 
 ---
 
 ## Affiliate Strategy
 
-As playbooks and articles naturally test and recommend tools, include affiliate links for the tools reviewed. This is a secondary revenue stream that compounds with traffic.
+Affiliate revenue is the near-term monetization model. Playbook sales come later once the brand has traffic, an email list, and established authority.
 
-**Rules:**
-- Only link to tools we have personally tested and genuinely recommend.
-- Always disclose affiliate relationships (required by FTC, and it's the right thing to do).
-- Never let affiliate potential influence tool recommendations. Recommend the best tool for the job, period.
-- Affiliate links go in both free articles and paid playbooks where relevant.
+### Approach
 
-**Priority affiliate programs:** Sign up for affiliate programs as we test tools. Focus on tools with recurring commissions (SaaS products with monthly billing) over one-time payouts.
+Start publishing content now without affiliate links. Build the content library and SEO footprint first. Apply to affiliate programs in parallel. When programs approve, retrofit links into existing articles and add them going forward.
+
+### Rules
+
+- Recommend the best tool for the job, period. Never let affiliate potential influence recommendations.
+- Always disclose affiliate relationships (FTC required, and it builds trust).
+- Affiliate links go in content engine articles, Emilio Originals (where relevant), and the tool directory page.
+- Prioritize programs with recurring commissions (SaaS monthly billing) over one-time payouts.
+
+### Priority Affiliate Programs
+
+**Apply immediately (low barrier, approve most sites):**
+- Amazon Associates (books and products referenced in content)
+- Impact.com network (access to multiple SaaS programs through one platform)
+- ShareASale network (similar to Impact)
+
+**Apply as content builds (may want to see traffic/content first):**
+- Netlify (referral program, already mentioned in Article 1)
+- Beehiiv (already using it, natural fit)
+- Zapier, Make (automation tools, core to our audience)
+- Notion, Airtable (productivity/workflow tools with AI features)
+- n8n (already mentioned in Article 1)
+- Individual AI tool programs (Claude/Anthropic, OpenAI, Jasper, etc.) as reviewed
+
+**Chicken-and-egg strategy:** Some programs approve sites with minimal content (Amazon, Impact, ShareASale). Apply to these first. Build content for 4-6 weeks, then apply to selective SaaS-direct programs that want to see traffic.
+
+---
+
+## SEO Approach
+
+**Target keywords:** Commercial-intent, long-tail queries that non-technical business owners search for. Not "AI tools" (too broad) but "[specific tool] review," "[tool A] vs [tool B]," "best AI tool for [specific task]."
+
+**Keyword research:** Informs both content engine topic selection and Emilio Original topics. Identify what the target audience is actively searching for related to AI tools, automation, and workflow optimization.
+
+**On-page SEO basics:**
+- Clear H1 with target keyword
+- Meta description that sells the click
+- Internal links between related articles, to tool directory entries, and to playbook sales pages (when they exist)
+- Alt text on all images
+- Fast page load (Astro + Netlify handles this)
+- Schema markup (Article JSON-LD on all blog posts)
+
+**Content velocity:** 3-5 content engine articles per week plus 1-2 Emilio Originals per month. Volume matters for SEO coverage, but every article must clear the quality bar.
+
+---
+
+## How Free Content Funnels to Revenue
+
+### Near-Term: Affiliate Revenue
+
+Content engine articles and tool directory entries include affiliate links for reviewed tools. Revenue scales with traffic volume.
+
+### Future: Playbook Sales
+
+Every article should have a natural connection to a relevant playbook when playbooks are available. The connection is contextual, not forced. A tool comparison article links to the playbook that walks through full implementation. A tutorial on basic setup links to the playbook covering advanced configuration.
+
+**Placement:** In-content callouts (not pop-ups, not aggressive banners). "Want the full implementation? The [Playbook Name] covers [what's included] with exact steps, prompts, and troubleshooting."
 
 ---
 
 ## Distribution Philosophy
 
-**Do not distribute to communities immediately upon publication.** Brand reception and authority are fragile. Premature exposure to an early-stage content library risks permanent dismissal from the communities we want to build credibility in. People form lasting first impressions of brands, and a thin content library or unpolished posts can undermine long-term credibility in spaces like Reddit and Indie Hackers.
+**Do not distribute to communities immediately upon publication.** Brand reception and authority are fragile. Premature exposure to an early-stage content library risks permanent dismissal from the communities we want to build credibility in.
 
 **The approach:**
 
 1. **Publish and measure organically.** Use GA4, on-site upvotes, and share activity to gauge engagement across multiple posts.
-2. **Iterate and improve.** Use engagement data to refine content quality, formatting, and headlines over time.
-3. **Distribute selectively.** Once a post shows strong organic engagement signals, distribute that specific post to communities. Not every post gets distributed. Lead with the strongest content.
+2. **Iterate and improve.** Use engagement data to refine content quality, formatting, and headlines.
+3. **Distribute selectively.** Once a post shows strong organic engagement signals, distribute that specific post to communities. Not every post gets distributed.
 4. **Build credibility with proven content.** The first impression in any community should be the best content we have, not the first content we published.
 
 ### Channels (When Ready)
 
-**Reddit:** r/smallbusiness, r/entrepreneur, r/artificial, r/SideProject, and other relevant subreddits as discovered. Post genuinely useful content. Participate in discussions. Link to the full article on workmultiple.com when relevant, not to the sales page directly.
-
+**Reddit:** r/smallbusiness, r/entrepreneur, r/artificial, r/SideProject. Post genuinely useful content. Participate in discussions.
 **Indie Hackers:** Share lessons learned, tool comparisons, and building-in-public updates.
-
-**Twitter/X ([@WorkMultipleAI](https://x.com/WorkMultipleAI)):** Short-form versions of article insights. Thread breakdowns of tools tested and results.
-
-**LinkedIn:** Longer-form posts about AI workflow automation for business owners. Position as a practical resource, not a thought leader.
+**Twitter/X ([@WorkMultipleAI](https://x.com/WorkMultipleAI)):** Short-form versions of article insights. Thread breakdowns.
+**LinkedIn:** Longer-form posts about AI workflow automation for business owners.
 
 ### What NOT to Do
 
 - No paid ads (not yet; organic first to validate demand).
-- No YouTube (not a fit for the founder's strengths right now).
-- No podcast (same reasoning).
-- No DMs or outbound to individuals. The content does the selling.
+- No YouTube, no podcast (not a fit right now).
+- No DMs or outbound. The content does the selling.
 - No buying email lists or spamming communities.
-- No distributing to communities before engagement signals confirm the content is resonating.
+
+---
+
+## Media Workflow: Videos in Articles
+
+Screen recordings and short video clips are embedded inline in Emilio Originals using the Video Embed component in Keystatic. Videos autoplay (muted, looped) when the reader scrolls them into view, with pause and fullscreen controls on hover. Content engine articles typically do not include video.
+
+**How to add a video to an article:**
+
+1. Emilio records the screen capture (any format, typically MP4).
+2. Agent converts the MP4 to WebM (VP9 codec, no audio, scaled to 1280px width) using ffmpeg. This typically reduces file size by 80-90%.
+3. Converted file goes to `public/blog-videos/[post-slug]/` with a descriptive filename.
+4. In Keystatic, insert a Video Embed block and enter the path: `/blog-videos/[post-slug]/filename.webm`.
+5. The original MP4 source files are kept in `03 - Content/Article [N]/` for reference but are not deployed.
+
+**Conversion command reference:** `ffmpeg -i input.mp4 -an -c:v libvpx-vp9 -b:v 0 -crf 35 -vf "scale=1280:-2" -deadline good -cpu-used 2 -row-mt 1 output.webm`
+
+## Media Workflow: Screenshots in Articles
+
+Screenshots are added via drag-and-drop in the Keystatic editor. Each upload gets a unique filename automatically (timestamp-based suffix). Images are stored in `public/blog-images/[post-slug]/` and deployed with the site.
 
 ---
 

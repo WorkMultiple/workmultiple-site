@@ -40,6 +40,8 @@ The site is live at workmultiple.com, built with Astro and deployed via GitHub i
 - Sitemap, robots.txt, Open Graph/Twitter Card meta tags, favicon
 - Native email capture form: custom EmailCapture.astro component submits to a Netlify Function (`netlify/functions/subscribe.mjs`, v1 handler format) that proxies to the Beehiiv API. BEEHIIV_API_KEY and BEEHIIV_PUBLICATION_ID are set as Netlify environment variables. Subscribers confirmed flowing into Beehiiv.
 - Premium dark theme (see BRAND.md Visual Direction)
+- Keystatic CMS: local git-based CMS with rich editor at /keystatic (dev only). Blog posts authored as Markdoc (.mdoc) files in `src/content/blog/[slug]/`. Supports draft/published status, tags, drag-and-drop image uploads, custom Prompt Block (copyable AI prompts), and Video Embed (autoplay-on-scroll) components. Images stored in `public/blog-images/` with unique filenames. Videos stored in `public/blog-videos/[slug]/` as WebM.
+- Share buttons on blog posts: X/Twitter, LinkedIn, Reddit, email, and native Web Share API (mobile). Positioned below post content, above email CTA.
 
 ---
 

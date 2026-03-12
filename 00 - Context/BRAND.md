@@ -26,7 +26,7 @@
 1. **Lead with outcomes, not technology.** We sell time saved, processes fixed, and results achieved. AI is the how, not the what.
 2. **Be direct.** No fluff. Say what the tool does, what it costs the reader in time, and what they'll get.
 3. **Make AI feel normal.** Practical tool, not a threat. No jargon.
-4. **Show, don't tell.** Every playbook and article is based on things we actually built and tested. That's our credibility.
+4. **Show, don't tell.** Emilio Originals are based on things we actually built and tested. That's our credibility anchor. Content engine articles are thoroughly researched and present accurate, useful information. When we have hands-on experience with a tool, we say so. When we don't, we're transparent about the basis of our assessment.
 5. **Be opinionated.** We test tools and tell readers what works and what doesn't. We don't hedge with "it depends on your use case" when we have a clear answer.
 
 ### Do / Don't Examples
@@ -55,7 +55,7 @@
 **New positioning:** WorkMultiple is the practical guide to getting more done with AI. We test the tools, document the workflows, and publish implementation-ready playbooks so non-technical people can automate real business problems without hiring a developer or an agency.
 
 **Elevator pitch:**
-"WorkMultiple publishes premium playbooks and practical guides that show non-technical business owners exactly how to use AI tools to automate real work. Not theory, not 'Top 10' lists. Step-by-step implementation with exact prompts, exact tool settings, and troubleshooting guides. We test everything ourselves and tell you what actually works."
+"WorkMultiple is the practical guide to AI tools for business owners who want results, not theory. We publish in-depth tool reviews, honest comparisons, and implementation-ready guides. Our founder tests tools hands-on and documents what works. Our content engine covers the full landscape so you don't have to. No fluff, no generic 'Top 10' lists. Just clear, useful information about what works and what doesn't."
 
 ---
 

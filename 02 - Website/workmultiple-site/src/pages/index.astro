@@ -9,13 +9,17 @@ import { getCollection } from 'astro:content';
 let posts: any[] = [];
 try {
   const allPosts = await getCollection('blog');
+  const isDev = import.meta.env.DEV;
   posts = allPosts
-    .filter((post) => post.data.status === 'published')
+    .filter((post) => isDev || post.data.status === 'published')
     .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-    .slice(0, 3);
+    .slice(0, 12);
 } catch {
   // No blog posts yet, section will show empty state
 }
+
+const carouselPosts = posts.slice(0, 3);
+const gridPosts = posts.slice(3);
 ---
 
 <BaseLayout title="WorkMultiple | More done. Same team.">
@@ -27,77 +31,105 @@ try {
   <Header />
 
   <main>
-    <!-- Hero -->
-    <section class="hero animate-fade-up">
-      <div class="container hero-inner">
-        <div class="tagline badge">AI Automation</div>
-        <h1 class="text-gradient">More done. <br/>Same team.</h1>
-        <p class="hero-sub">Practical AI playbooks and guides for business owners who want results, not theory.</p>
-        <div class="hero-actions">
-          <a href="#subscribe" class="btn btn-primary">Get the free guides</a>
-          <a href="/blog" class="btn btn-secondary">Read latest articles</a>
-        </div>
-      </div>
-    </section>
+    <!-- Featured Article Carousel -->
+    {carouselPosts.length > 0 ? (
+      <section class="carousel-section animate-fade-up">
+        <div class="container">
+          <div class="carousel" id="featured-carousel">
+            <div class="carousel-track" id="carousel-track">
+              {carouselPosts.map((post, i) => (
+                <div class={`carousel-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
+                  <a href={`/blog/${post.id}`} class="carousel-card">
+                    <div class="carousel-image-wrap">
+                      <img
+                        src={`/images/cards/${post.id}.png`}
+                        alt={post.data.title}
+                        class="carousel-image"
+                      />
+                    </div>
+                    <div class="carousel-content">
+                      <time datetime={post.data.date}>
+                        {new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      </time>
+                      <h2>{post.data.title}</h2>
+                      <p>{post.data.description}</p>
+                      <span class="read-more">Read article &rarr;</span>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
 
-    <!-- Credibility -->
-    <section class="credibility">
-      <div class="container">
-        <div class="cred-grid">
-          <div class="cred-card fade-in-up" style="animation-delay: 0.1s">
-            <div class="cred-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
             </div>
-            <h3>Tested, not theoretical.</h3>
-            <p>We build and test every workflow before publishing it. No fluff.</p>
-          </div>
-          <div class="cred-card fade-in-up" style="animation-delay: 0.2s">
-            <div class="cred-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 9.36l-6.9 6.9a2.12 2.12 0 0 1-3-3l6.9-6.9a6 6 0 0 1 9.36-7.94l-3.79 3.79z"></path></svg>
-            </div>
-            <h3>Implementation-ready.</h3>
-            <p>Exact steps, exact tool settings, exact prompts. Follow along, get results.</p>
-          </div>
-          <div class="cred-card fade-in-up" style="animation-delay: 0.3s">
-            <div class="cred-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            </div>
-            <h3>Built for non-technical people.</h3>
-            <p>No coding required. No jargon. Just clear instructions that actually work.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Latest Articles -->
-    <section class="latest-articles relative">
-      <div class="container">
-        <div class="section-header">
-          <h2>Latest articles</h2>
-          <a href="/blog" class="view-all">View all &rarr;</a>
+            <!-- Navigation arrows -->
+            <button class="carousel-arrow carousel-arrow-prev" id="carousel-prev" aria-label="Previous slide">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="carousel-arrow carousel-arrow-next" id="carousel-next" aria-label="Next slide">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Navigation dots -->
+          <div class="carousel-dots" id="carousel-dots">
+            {carouselPosts.map((_, i) => (
+              <button
+                class={`carousel-dot ${i === 0 ? 'active' : ''}`}
+                data-index={i}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
-        {posts.length > 0 ? (
-          <div class="articles-grid">
-            {posts.map((post) => (
-              <a href={`/blog/${post.slug}`} class="article-card">
-                <time datetime={post.data.date}>{new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
-                <h3>{post.data.title}</h3>
-                <p>{post.data.description}</p>
-                <div class="read-more">Read article &rarr;</div>
+      </section>
+    ) : (
+      <section class="carousel-section animate-fade-up">
+        <div class="container">
+          <div class="articles-empty glass-panel fade-in-up">
+            <div class="empty-icon">📝</div>
+            <p>First articles coming soon. Practical tool comparisons, workflow breakdowns, and AI guides built for business owners.</p>
+            <a href="#subscribe" class="btn btn-accent empty-cta mt-4">Get notified when we publish</a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Article Grid -->
+    {gridPosts.length > 0 && (
+      <section class="article-grid-section">
+        <div class="container">
+          <h2 class="section-heading fade-in-up">All articles</h2>
+          <div class="card-grid">
+            {gridPosts.map((post, index) => (
+              <a href={`/blog/${post.id}`} class="grid-card fade-in-up" style={`animation-delay: ${0.1 + (index * 0.05)}s`}>
+                <div class="grid-card-image">
+                  <img
+                    src={`/images/cards/${post.id}.png`}
+                    alt={post.data.title}
+                    loading="lazy"
+                  />
+                </div>
+                <div class="grid-card-body">
+                  <time datetime={post.data.date}>
+                    {new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  </time>
+                  <h3>{post.data.title}</h3>
+                  <span class="read-more">Read article &rarr;</span>
+                </div>
               </a>
             ))}
           </div>
-        ) : (
-          <div class="articles-empty glass-panel">
-            <div class="empty-icon">📝</div>
-            <p>First articles coming soon. Practical tool comparisons, workflow breakdowns, and AI guides built for business owners.</p>
-            <a href="#subscribe" class="btn btn-accent empty-cta">Get notified when we publish</a>
-          </div>
-        )}
-      </div>
-    </section>
+        </div>
+      </section>
+    )}
 
-    <!-- Playbooks Coming Soon -->
+    <!-- Playbooks Coming Soon (Hidden) -->
+    {false && (
     <section class="playbooks-teaser">
       <div class="area-glow"></div>
       <div class="container playbooks-inner glass-panel">
@@ -106,11 +138,12 @@ try {
         <a href="#subscribe" class="btn btn-primary mt-4">Get notified at launch</a>
       </div>
     </section>
+    )}
 
     <!-- Email Capture -->
     <section class="subscribe" id="subscribe">
-      <div class="container subscribe-inner">
-        <h2>Skip the 20 hours of trial and error.</h2>
+      <div class="container subscribe-inner fade-in-up" style="animation-delay: 0.3s">
+        <h2>Get our latest reviews and guides in your inbox.</h2>
         <p class="subscribe-sub">Get the exact AI workflows we test. Practical guides, tool reviews, and early access to new playbooks. No spam, no fluff.</p>
         <EmailCapture />
       </div>
@@ -121,7 +154,7 @@ try {
 </BaseLayout>
 
 <style>
-  /* Hero Background Effects */
+  /* ─── Hero Background Effects ─── */
   .hero-bg-wrapper {
     position: absolute;
     top: 0;
@@ -139,7 +172,7 @@ try {
     height: 200%;
     top: -50%;
     left: -50%;
-    background-image: 
+    background-image:
       linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
@@ -164,211 +197,293 @@ try {
     100% { transform: perspective(500px) rotateX(60deg) translateY(50px) translateZ(-200px); }
   }
 
-  /* Typography Utilities */
-  .badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-accent);
-    background: rgba(0, 229, 255, 0.1);
-    border: 1px solid rgba(0, 229, 255, 0.2);
-    border-radius: 9999px;
-    margin-bottom: 1.5rem;
-  }
-
+  /* ─── Utilities ─── */
   .mt-4 {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
 
-  /* Hero Section */
-  .hero {
-    padding: 8rem 0 6rem;
-    text-align: center;
+  .fade-in-up {
+    opacity: 0;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .hero-inner {
-    max-width: 800px;
-    margin: 0 auto;
+  /* ─── Featured Carousel Section ─── */
+  .carousel-section {
+    padding: 6rem 0 2rem;
+    position: relative;
   }
 
-  .hero h1 {
-    font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-sub {
-    font-size: clamp(1.125rem, 3vw, 1.375rem);
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Credibility Section (Bento Style) */
-  .credibility {
-    padding: 2rem 0 6rem;
-  }
-
-  .cred-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .cred-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    padding: 2.5rem 2rem;
-    transition: all 0.3s ease;
+  .carousel {
     position: relative;
     overflow: hidden;
+    border-radius: 20px;
   }
 
-  .cred-card::before {
-    content: '';
+  .carousel-track {
+    position: relative;
+    min-height: 400px;
+  }
+
+  .carousel-slide {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
-    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    z-index: 1;
   }
 
-  .cred-card:hover {
-    border-color: rgba(255,255,255,0.1);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .cred-card:hover::before {
+  .carousel-slide.active {
     opacity: 1;
-  }
-
-  .cred-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-accent);
-    margin-bottom: 1.5rem;
+    visibility: visible;
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
 
-  .cred-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    color: var(--color-text);
-    position: relative;
-    z-index: 1;
-  }
-
-  .cred-card p {
-    font-size: 0.9375rem;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Latest Articles */
-  .latest-articles {
-    padding: 6rem 0;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 3rem;
-  }
-
-  .section-header h2 {
-    font-size: 2.5rem;
-    margin-bottom: 0;
-  }
-
-  .view-all {
-    color: var(--color-text-secondary);
-    font-weight: 500;
-  }
-
-  .view-all:hover {
-    color: var(--color-text);
-  }
-
-  .articles-grid {
+  .carousel-card {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
   }
 
-  .article-card {
+  .carousel-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 15px 50px -15px rgba(0, 229, 255, 0.2);
+  }
+
+  .carousel-image-wrap {
+    position: relative;
+    overflow: hidden;
+    /* Removed aspect-ratio and height: 100% to let it stretch naturally on desktop */
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+  }
+
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .carousel-content {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    background-color: var(--color-surface);
-    transition: all 0.3s ease;
-    height: 100%;
+    justify-content: center;
+    padding: 3rem;
   }
 
-  .article-card:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 10px 30px -10px rgba(0, 229, 255, 0.1);
-    transform: translateY(-4px);
-  }
-
-  .article-card time {
+  .carousel-content time {
     font-size: 0.8125rem;
     color: var(--color-text-muted);
-    display: block;
-    margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    display: block;
   }
 
-  .article-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    line-height: 1.4;
+  .carousel-content h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--color-text);
   }
 
-  .article-card p {
-    font-size: 0.9375rem;
+  .carousel-content p {
+    font-size: 1.0625rem;
     color: var(--color-text-secondary);
-    margin-bottom: 2rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
     flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .read-more {
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--color-accent);
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .carousel-card:hover .read-more {
+    transform: translateX(4px);
+  }
+
+  /* Carousel Navigation Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem 0 0;
+  }
+
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .carousel-dot.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+  }
+
+  .carousel-dot:hover {
+    border-color: var(--color-accent);
+  }
+
+  /* Carousel Arrows */
+  .carousel-arrow {
+    position: absolute;
+    top: calc(50% - 1rem);
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: rgba(18, 18, 20, 0.8);
+    backdrop-filter: blur(8px);
+    color: var(--color-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+  }
+
+  .carousel-arrow:hover {
+    border-color: var(--color-accent);
+    background: rgba(18, 18, 20, 0.95);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.2);
+  }
+
+  .carousel-arrow-prev {
+    left: 1rem;
+  }
+
+  .carousel-arrow-next {
+    right: 1rem;
+  }
+
+  /* ─── Section Heading (divider) ─── */
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+  }
+
+  /* ─── Article Grid Section ─── */
+  .article-grid-section {
+    padding: 2rem 0 6rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .grid-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  .grid-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 10px 30px -10px rgba(0, 229, 255, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .grid-card-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1200 / 630;
+    background: var(--color-bg);
+  }
+
+  .grid-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .grid-card:hover .grid-card-image img {
+    transform: scale(1.03);
+  }
+
+  .grid-card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.5rem 1.5rem;
+    flex-grow: 1;
+  }
+
+  .grid-card-body time {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.625rem;
+    display: block;
+  }
+
+  .grid-card-body h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .grid-card-body .read-more {
     margin-top: auto;
   }
 
+  .grid-card:hover .read-more {
+    transform: translateX(4px);
+  }
+
+  /* ─── Empty state ─── */
   .articles-empty {
     padding: 4rem 2rem;
     border-radius: 16px;
@@ -390,9 +505,9 @@ try {
     margin-right: auto;
   }
 
-  /* Playbooks Teaser */
+  /* ─── Playbooks Teaser (Hidden) ─── */
   .playbooks-teaser {
-    padding: 8rem 0;
+    padding: 5rem 0;
   }
 
   .area-glow {
@@ -425,9 +540,9 @@ try {
     margin-bottom: 2rem;
   }
 
-  /* Subscribe Section */
+  /* ─── Subscribe Section ─── */
   .subscribe {
-    padding: 6rem 0 10rem;
+    padding: 4rem 0 10rem;
     text-align: center;
   }
 
@@ -437,8 +552,9 @@ try {
   }
 
   .subscribe h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
+    letter-spacing: -0.02em;
   }
 
   .subscribe-sub {
@@ -447,56 +563,158 @@ try {
     margin-bottom: 3rem;
   }
 
-  /* Fade in utilities */
-  .fade-in-up {
-    opacity: 0;
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* ─── Responsive: Tablet (1024px) ─── */
+  @media (max-width: 1024px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
-  /* Responsive */
+  /* ─── Responsive: Mobile (768px) ─── */
   @media (max-width: 768px) {
-    .hero {
-      padding: 5rem 0 4rem;
+    .hero-bg-wrapper {
+      height: 60vh;
     }
 
-    .hero-actions {
-      flex-direction: column;
-      width: 100%;
-    }
-    
-    .hero-actions .btn {
-      width: 100%;
+    .carousel-section {
+      padding: 5rem 0 2rem;
     }
 
-    .cred-grid, .articles-grid {
+    .carousel-card {
       grid-template-columns: 1fr;
     }
 
-    .section-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
+    .carousel-image-wrap {
+      aspect-ratio: 16 / 9;
+    }
+
+    .carousel-content {
+      padding: 1.75rem;
+    }
+
+    .carousel-content h2 {
+      font-size: 1.375rem;
+    }
+
+    .carousel-arrow {
+      display: none;
+    }
+
+    .card-grid {
+      grid-template-columns: 1fr;
     }
 
     .playbooks-inner {
       padding: 2.5rem 1.5rem;
     }
 
-    .playbooks-inner h2, .section-header h2, .subscribe h2 {
-      font-size: 2rem;
+    .playbooks-inner h2, .subscribe h2 {
+      font-size: 1.75rem;
     }
   }
 </style>
 
 <script>
-  // Simple hover effect for bento cards
-  document.querySelectorAll('.cred-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
-      (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+  // Featured Carousel
+  (function () {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+
+    if (!slides.length) return;
+
+    let current = 0;
+    const total = slides.length;
+    let timer = null;
+    const INTERVAL = 6000;
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (index + total) % total;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() {
+      goTo(current + 1);
+    }
+
+    function prev() {
+      goTo(current - 1);
+    }
+
+    function startTimer() {
+      stopTimer();
+      timer = setInterval(next, INTERVAL);
+    }
+
+    function stopTimer() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    // Dot click handlers
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        var idx = parseInt(this.getAttribute('data-index'), 10);
+        goTo(idx);
+        startTimer();
+      });
     });
-  });
+
+    // Arrow click handlers
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        prev();
+        startTimer();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        next();
+        startTimer();
+      });
+    }
+
+    // Pause when tab not visible
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopTimer();
+      } else {
+        startTimer();
+      }
+    });
+
+    // Touch/swipe support for mobile
+    var touchStartX = 0;
+    var touchEndX = 0;
+    var carousel = document.getElementById('featured-carousel');
+
+    if (carousel) {
+      carousel.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', function (e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            next();
+          } else {
+            prev();
+          }
+          startTimer();
+        }
+      }, { passive: true });
+    }
+
+    // Start auto-advance
+    startTimer();
+  })();
 </script>
