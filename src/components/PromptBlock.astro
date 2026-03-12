@@ -1,0 +1,127 @@
+---
+interface Props {
+  label?: string;
+  prompt: string;
+}
+
+const { label = 'Prompt', prompt } = Astro.props;
+---
+
+<div class="prompt-block">
+  <div class="prompt-header">
+    <span class="prompt-label">{label}</span>
+    <button class="prompt-copy" data-prompt={prompt} aria-label="Copy prompt to clipboard">
+      <svg class="prompt-copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+      <span class="prompt-copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="prompt-content">{prompt}</pre>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.prompt-copy').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const prompt = btn.getAttribute('data-prompt') || '';
+        const textEl = btn.querySelector('.prompt-copy-text') as HTMLSpanElement;
+
+        try {
+          await navigator.clipboard.writeText(prompt);
+          textEl.textContent = 'Copied';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            textEl.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        } catch {
+          // Fallback for older browsers
+          const textarea = document.createElement('textarea');
+          textarea.value = prompt;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          textEl.textContent = 'Copied';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            textEl.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .prompt-block {
+    margin: 2rem 0;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.04) 0%, rgba(99, 102, 241, 0.04) 100%);
+    overflow: hidden;
+  }
+
+  .prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem 1.25rem;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+    background: rgba(0, 229, 255, 0.03);
+  }
+
+  .prompt-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent, #00e5ff);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .prompt-copy {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.3rem 0.625rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border, #27272a);
+    background: var(--color-surface, #121214);
+    color: var(--color-text-secondary, #a1a1aa);
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .prompt-copy:hover {
+    color: var(--color-text, #f8fafc);
+    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--color-surface-hover, #18181b);
+  }
+
+  .prompt-copy.copied {
+    color: #22c55e;
+    border-color: rgba(34, 197, 94, 0.3);
+  }
+
+  .prompt-content {
+    padding: 1.25rem;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary, #a1a1aa);
+    font-family: var(--font-family, 'Inter', sans-serif);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+</style>

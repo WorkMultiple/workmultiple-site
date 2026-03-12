@@ -1,0 +1,61 @@
+---
+// Navigation header
+---
+
+<header class="site-header glass-panel">
+  <div class="container header-inner">
+    <a href="/" class="wordmark">WorkMultiple</a>
+    <nav class="nav">
+      <a href="/blog" class="nav-link">Blog</a>
+      <a href="#subscribe" class="nav-link nav-cta">Subscribe</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .wordmark {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+  }
+
+  .nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+  }
+
+  .nav-cta {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .nav-cta:hover {
+    color: var(--color-accent-hover);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  }
+</style>

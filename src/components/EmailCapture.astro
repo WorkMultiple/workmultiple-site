@@ -1,0 +1,214 @@
+---
+// Native email capture form - replaces Beehiiv iframe
+// Submits to Netlify Function which proxies to Beehiiv API
+---
+
+<div class="email-capture-form">
+  <form id="subscribe-form" class="capture-form" novalidate>
+    <div class="form-row">
+      <input
+        type="email"
+        id="email-input"
+        name="email"
+        placeholder="Enter your email"
+        required
+        autocomplete="email"
+      />
+      <button type="submit" id="submit-btn">
+        <span class="btn-text">Subscribe</span>
+        <span class="btn-loading" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+    <p class="form-note">Free guides and tool reviews. No spam, unsubscribe anytime.</p>
+    <p class="form-message" id="form-message" aria-live="polite"></p>
+  </form>
+</div>
+
+<style>
+  .email-capture-form {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 0;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    padding: 5px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .form-row:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+  }
+
+  .form-row input[type="email"] {
+    flex: 1;
+    min-width: 0;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9375rem;
+    font-family: var(--font-family);
+    color: var(--color-text);
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .form-row input[type="email"]::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .form-row button {
+    flex-shrink: 0;
+    padding: 0.875rem 1.75rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    color: #000000;
+    background: linear-gradient(135deg, #00e5ff 0%, #6366f1 100%);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .form-row button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+    filter: brightness(1.1);
+  }
+
+  .form-row button:active {
+    transform: translateY(0);
+  }
+
+  .form-row button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-loading {
+    display: none;
+    animation: spin 1s linear infinite;
+  }
+
+  .form-row button.loading .btn-text {
+    display: none;
+  }
+
+  .form-row button.loading .btn-loading {
+    display: inline-flex;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .form-note {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+
+  .form-message {
+    font-size: 0.875rem;
+    text-align: center;
+    margin-top: 0.5rem;
+    min-height: 1.25rem;
+  }
+
+  .form-message.success {
+    color: #34d399;
+  }
+
+  .form-message.error {
+    color: #f87171;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 480px) {
+    .form-row {
+      flex-direction: column;
+      border-radius: 16px;
+      padding: 6px;
+    }
+
+    .form-row input[type="email"] {
+      padding: 1rem 1.25rem;
+      text-align: center;
+    }
+
+    .form-row button {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 12px;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('subscribe-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const input = document.getElementById('email-input');
+      const btn = document.getElementById('submit-btn');
+      const msg = document.getElementById('form-message');
+      const email = input.value.trim();
+
+      // Basic validation
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        msg.textContent = 'Please enter a valid email address.';
+        msg.className = 'form-message error';
+        return;
+      }
+
+      // Show loading state
+      btn.classList.add('loading');
+      btn.disabled = true;
+      msg.textContent = '';
+      msg.className = 'form-message';
+
+      try {
+        const res = await fetch('/.netlify/functions/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          msg.textContent = 'You\'re in! Check your inbox for a welcome email.';
+          msg.className = 'form-message success';
+          input.value = '';
+        } else {
+          msg.textContent = data.error || 'Something went wrong. Please try again.';
+          msg.className = 'form-message error';
+        }
+      } catch (err) {
+        msg.textContent = 'Connection error. Please try again.';
+        msg.className = 'form-message error';
+      } finally {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
