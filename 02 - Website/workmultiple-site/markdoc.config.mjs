@@ -16,5 +16,8 @@ export default defineMarkdocConfig({
         prompt: { type: String, required: true },
       },
     },
+    'sources-scroll': {
+      render: component('./src/components/SourcesScroll.astro'),
+    },
   },
 });

@@ -340,3 +340,22 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
     }
   }
 </style>
+
+<script is:inline>
+  // Open all external links in new tabs
+  document.addEventListener('DOMContentLoaded', () => {
+    const postContent = document.querySelector('.post-content');
+    if (!postContent) return;
+    const links = postContent.querySelectorAll('a[href^="http"]');
+    const siteHost = window.location.hostname;
+    links.forEach(link => {
+      try {
+        const url = new URL(link.href);
+        if (url.hostname !== siteHost) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        }
+      } catch (e) {}
+    });
+  });
+</script>
