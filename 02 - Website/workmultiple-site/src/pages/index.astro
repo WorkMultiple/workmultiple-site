@@ -13,7 +13,7 @@ try {
   posts = allPosts
     .filter((post) => isDev || post.data.status === 'published')
     .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-    .slice(0, 12);
+    .slice(0, 50);
 } catch {
   // No blog posts yet, section will show empty state
 }

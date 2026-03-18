@@ -95,6 +95,10 @@ const TOOL_CONFIGS = {
   'canva': { icon: 'canva', domain: 'canva.com' },
   'perplexity': { icon: 'perplexity', domain: 'perplexity.ai' },
   
+  'tidio': { domain: 'tidio.com' },
+  'freshsales': { domain: 'freshworks.com' },
+  'superhuman': { domain: 'superhuman.com' },
+
   // No SimpleIcons available or better fetched directly:
   'beehiiv': { domain: 'beehiiv.com' },
   'jasper': { domain: 'jasper.ai' },
