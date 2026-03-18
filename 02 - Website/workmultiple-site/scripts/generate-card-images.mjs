@@ -95,12 +95,18 @@ const TOOL_CONFIGS = {
   'canva': { icon: 'canva', domain: 'canva.com' },
   'perplexity': { icon: 'perplexity', domain: 'perplexity.ai' },
   
+  'tidio': { domain: 'tidio.com' },
+  'freshsales': { domain: 'freshworks.com' },
+  'superhuman': { domain: 'superhuman.com' },
+
   // No SimpleIcons available or better fetched directly:
   'beehiiv': { domain: 'beehiiv.com' },
   'jasper': { domain: 'jasper.ai' },
   'copy.ai': { domain: 'copy.ai' },
   'reclaim ai': { domain: 'reclaim.ai' },
   'reclaim': { domain: 'reclaim.ai' },
+  'motion': { domain: 'usemotion.com' },
+  'kit': { domain: 'kit.com' },
   'surfer seo': { domain: 'surferseo.com' },
   'convertkit': { domain: 'convertkit.com' },
   'midjourney': { domain: 'midjourney.com' },
@@ -194,7 +200,9 @@ async function getLogoDataUri(toolName) {
  * Parse frontmatter from a .mdoc or .md file
  */
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  // Normalize CRLF → LF to handle Windows line endings
+  const normalized = content.replace(/\r\n/g, '\n');
+  const match = normalized.match(/^---\n([\s\S]*?)\n---/);
   if (!match) return {};
   const fm = {};
   let currentKey = null;
@@ -244,6 +252,10 @@ function detectType(fm) {
  */
 function extractToolNames(title, type) {
   if (type === 'comparison') {
+    // Handle 3-way comparisons: "A vs B vs C: ..."
+    const threeWayMatch = title.match(/^(.+?)\s+vs\.?\s+(.+?)\s+vs\.?\s+(.+?):/i);
+    if (threeWayMatch) return [threeWayMatch[1].trim(), threeWayMatch[2].trim(), threeWayMatch[3].trim()];
+    // Handle 2-way comparisons: "A vs B: ..."
     const vsMatch = title.match(/^(.+?)\s+vs\.?\s+(.+?):/i);
     if (vsMatch) return [vsMatch[1].trim(), vsMatch[2].trim()];
   }
@@ -301,6 +313,47 @@ function buildCardMarkup(fm, slug, logoDataUris) {
     content = logo || {
       type: 'div',
       props: { style: { fontSize: '80px', fontWeight: 800, color: COLORS.text, letterSpacing: '-0.04em', display: 'flex' }, children: 'WorkMultiple' }
+    };
+  } else if (type === 'comparison' && tools.length === 3) {
+    const logo1 = logoDataUris[0] ? buildLogoElement(logoDataUris[0], 160) : null;
+    const logo2 = logoDataUris[1] ? buildLogoElement(logoDataUris[1], 160) : null;
+    const logo3 = logoDataUris[2] ? buildLogoElement(logoDataUris[2], 160) : null;
+
+    const vsEl = {
+      type: 'div',
+      props: {
+        style: { fontSize: '36px', fontWeight: 600, color: COLORS.textMuted, display: 'flex' },
+        children: 'vs'
+      }
+    };
+
+    content = {
+      type: 'div',
+      props: {
+        style: { display: 'flex', alignItems: 'center', gap: '40px' },
+        children: [
+          logo1 || {
+            type: 'div',
+            props: { style: { fontSize: '48px', fontWeight: 800, color: COLORS.text, letterSpacing: '-0.04em', display: 'flex' }, children: tools[0] }
+          },
+          vsEl,
+          logo2 || {
+            type: 'div',
+            props: { style: { fontSize: '48px', fontWeight: 800, color: COLORS.text, letterSpacing: '-0.04em', display: 'flex' }, children: tools[1] }
+          },
+          {
+            type: 'div',
+            props: {
+              style: { fontSize: '36px', fontWeight: 600, color: COLORS.textMuted, display: 'flex' },
+              children: 'vs'
+            }
+          },
+          logo3 || {
+            type: 'div',
+            props: { style: { fontSize: '48px', fontWeight: 800, color: COLORS.text, letterSpacing: '-0.04em', display: 'flex' }, children: tools[2] }
+          },
+        ]
+      }
     };
   } else if (type === 'comparison' && tools.length === 2) {
     const logo1 = logoDataUris[0] ? buildLogoElement(logoDataUris[0], 240) : null;

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ShareButtons from '../../components/ShareButtons.astro';
+import EmailCapture from '../../components/EmailCapture.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -59,17 +60,7 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
         <div class="post-cta">
           <h2>Skip the 20 hours of trial and error.</h2>
           <p>Get the exact AI workflows we test. Practical guides, tool reviews, and early access to new playbooks.</p>
-          <div class="beehiiv-wrapper">
-            <script is:inline async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-            <iframe
-              src="https://subscribe-forms.beehiiv.com/20e51a6c-65f3-4d83-bea4-de245129feef"
-              class="beehiiv-embed"
-              data-test-id="beehiiv-embed"
-              frameborder="0"
-              scrolling="no"
-              style="width: 100%; max-width: 560px; height: 315px; margin: 0; border-radius: 0; background-color: transparent; box-shadow: none;"
-            ></iframe>
-          </div>
+          <EmailCapture />
         </div>
       </div>
     </div>
@@ -203,6 +194,12 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
     color: inherit;
   }
 
+  .post-content :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 3rem 0;
+  }
+
   .post-content :global(img) {
     border-radius: 12px;
     margin: 2rem 0;
@@ -319,15 +316,6 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .beehiiv-wrapper {
-    display: flex;
-    justify-content: center;
-    background: rgba(0,0,0,0.2);
-    padding: 1rem;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.03);
   }
 
   @media (max-width: 768px) {
