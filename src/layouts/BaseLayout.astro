@@ -10,7 +10,9 @@ interface Props {
     headline: string;
     description: string;
     datePublished: string;
+    dateModified?: string;
     author: string;
+    image?: string;
   };
 }
 
@@ -74,6 +76,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "headline": articleSchema.headline,
         "description": articleSchema.description,
         "datePublished": articleSchema.datePublished,
+        ...(articleSchema.dateModified && { "dateModified": articleSchema.dateModified }),
+        ...(articleSchema.image && { "image": new URL(articleSchema.image, "https://workmultiple.com").href }),
         "author": {
           "@type": "Person",
           "name": articleSchema.author,
