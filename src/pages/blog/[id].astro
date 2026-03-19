@@ -58,6 +58,10 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
         <ShareButtons title={post.data.title} url={`https://workmultiple.com/blog/${post.id}`} />
       </div>
 
+      <div class="affiliate-disclosure">
+        <p>Some links in this article may be affiliate links. If you click through and make a purchase or sign up, we may earn a small commission at no extra cost to you. This helps support our work. Our recommendations are based on research and testing, not affiliate partnerships. <a href="/terms#affiliate-disclosure">Full disclosure</a></p>
+      </div>
+
       <div class="post-footer">
         <div class="post-cta">
           <h2>Skip the 20 hours of trial and error.</h2>
@@ -286,6 +290,34 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
     margin-top: 4rem;
     padding-top: 2.5rem;
     border-top: 1px solid var(--color-border);
+  }
+
+  /* Affiliate disclosure */
+  .affiliate-disclosure {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .affiliate-disclosure p {
+    margin: 0;
+  }
+
+  .affiliate-disclosure a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(0, 229, 255, 0.3);
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .affiliate-disclosure a:hover {
+    text-decoration-color: var(--color-accent);
   }
 
   /* Post footer CTA */

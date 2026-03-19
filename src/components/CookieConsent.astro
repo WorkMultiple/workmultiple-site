@@ -1,0 +1,169 @@
+---
+// CookieConsent.astro
+// Lightweight, on-brand cookie consent banner.
+// Stores preference in localStorage. No third-party dependencies.
+---
+
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie consent" style="display: none;">
+  <div class="cookie-inner">
+    <p class="cookie-text">
+      We use cookies for analytics and to support affiliate partnerships that help fund this site. No personal data is sold.
+      <a href="/privacy">Privacy Policy</a>
+    </p>
+    <div class="cookie-actions">
+      <button id="cookie-decline" class="cookie-btn cookie-btn-decline">Decline</button>
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accept</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 1rem;
+    background: rgba(18, 18, 20, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--color-border);
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .cookie-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .cookie-text {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+
+  .cookie-text a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(0, 229, 255, 0.3);
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .cookie-text a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-btn {
+    font-family: var(--font-family);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .cookie-btn-decline {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+
+  .cookie-btn-decline:hover {
+    background: var(--color-surface-hover);
+    color: var(--color-text);
+  }
+
+  .cookie-btn-accept {
+    background: var(--color-accent);
+    color: #09090b;
+    font-weight: 600;
+  }
+
+  .cookie-btn-accept:hover {
+    background: var(--color-accent-hover);
+  }
+
+  @media (max-width: 640px) {
+    .cookie-inner {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .cookie-actions {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .cookie-btn {
+      flex: 1;
+      max-width: 140px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    var consent = localStorage.getItem('wm_cookie_consent');
+
+    // Show banner if no preference stored
+    if (!consent) {
+      var banner = document.getElementById('cookie-banner');
+      if (banner) banner.style.display = 'block';
+    }
+
+    // If previously accepted, GA4 is already loading via the script tag.
+    // If declined, we disable GA4.
+    if (consent === 'declined') {
+      window['ga-disable-G-N8EBSXFJLE'] = true;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var acceptBtn = document.getElementById('cookie-accept');
+      var declineBtn = document.getElementById('cookie-decline');
+      var banner = document.getElementById('cookie-banner');
+
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', function() {
+          localStorage.setItem('wm_cookie_consent', 'accepted');
+          if (banner) banner.style.display = 'none';
+        });
+      }
+
+      if (declineBtn) {
+        declineBtn.addEventListener('click', function() {
+          localStorage.setItem('wm_cookie_consent', 'declined');
+          window['ga-disable-G-N8EBSXFJLE'] = true;
+          if (banner) banner.style.display = 'none';
+        });
+      }
+    });
+  })();
+</script>
