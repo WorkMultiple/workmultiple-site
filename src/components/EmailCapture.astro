@@ -198,6 +198,9 @@
           msg.textContent = 'You\'re in! Check your inbox for a welcome email.';
           msg.className = 'form-message success';
           input.value = '';
+          if (typeof amplitude !== 'undefined') {
+            amplitude.track('Newsletter Signup', { source: window.location.pathname });
+          }
         } else {
           msg.textContent = data.error || 'Something went wrong. Please try again.';
           msg.className = 'form-message error';

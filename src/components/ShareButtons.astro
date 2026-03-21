@@ -81,6 +81,32 @@ const { title, url } = Astro.props;
     const container = document.querySelector('.share-buttons');
     if (!container) return;
 
+    const title = container.getAttribute('data-title') || '';
+    const url = container.getAttribute('data-url') || '';
+
+    // Track all share button clicks
+    const shareLinks = container.querySelectorAll('.share-btn');
+    shareLinks.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const platforms: Record<string, string> = {
+          'share-twitter': 'Twitter',
+          'share-linkedin': 'LinkedIn',
+          'share-reddit': 'Reddit',
+          'share-email': 'Email',
+          'share-native': 'Native Share',
+        };
+        const platform = Object.entries(platforms).find(([cls]) => btn.classList.contains(cls));
+        if (platform && typeof amplitude !== 'undefined') {
+          amplitude.track('Article Shared', {
+            platform: platform[1],
+            article_title: title,
+            article_url: url,
+          });
+        }
+      });
+    });
+
+    // Native share button
     const nativeBtn = container.querySelector('.share-native') as HTMLButtonElement;
     if (!nativeBtn) return;
 
@@ -88,9 +114,6 @@ const { title, url } = Astro.props;
       nativeBtn.style.display = 'none';
       return;
     }
-
-    const title = container.getAttribute('data-title') || '';
-    const url = container.getAttribute('data-url') || '';
 
     nativeBtn.addEventListener('click', async () => {
       try {

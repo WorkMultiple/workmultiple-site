@@ -67,6 +67,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <title>{title}</title>
 
+    <!-- Amplitude Analytics -->
+    <script is:inline src="https://cdn.amplitude.com/script/1be35149603a5d8fed798153f3b0b34c.js"></script>
+    <script is:inline>
+      window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+      window.amplitude.init('1be35149603a5d8fed798153f3b0b34c', {"fetchRemoteConfig":true,"autocapture":{"attribution":true,"fileDownloads":true,"formInteractions":true,"pageViews":true,"sessions":true,"elementInteractions":true,"networkTracking":true,"webVitals":true,"frustrationInteractions":{"thrashedCursor":true,"errorClicks":true,"deadClicks":true,"rageClicks":true}}});
+    </script>
+
     <!-- Beehiiv attribution tracking -->
     <script is:inline type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 

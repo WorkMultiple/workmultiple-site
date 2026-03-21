@@ -154,6 +154,9 @@
         acceptBtn.addEventListener('click', function() {
           localStorage.setItem('wm_cookie_consent', 'accepted');
           if (banner) banner.style.display = 'none';
+          if (typeof amplitude !== 'undefined') {
+            amplitude.track('Cookie Consent', { action: 'accepted' });
+          }
         });
       }
 
@@ -162,6 +165,9 @@
           localStorage.setItem('wm_cookie_consent', 'declined');
           window['ga-disable-G-N8EBSXFJLE'] = true;
           if (banner) banner.style.display = 'none';
+          if (typeof amplitude !== 'undefined') {
+            amplitude.track('Cookie Consent', { action: 'declined' });
+          }
         });
       }
     });

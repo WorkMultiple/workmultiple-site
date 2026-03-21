@@ -73,6 +73,39 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
   </article>
 
   <Footer />
+
+  <!-- Amplitude: track outbound affiliate link clicks -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var postContent = document.querySelector('.post-content');
+      if (!postContent) return;
+
+      postContent.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+
+        var href = link.getAttribute('href') || '';
+        // Only track external links (not internal /blog/ links)
+        if (!href.startsWith('http')) return;
+
+        try {
+          var url = new URL(href);
+          var hostname = url.hostname.replace('www.', '');
+
+          if (typeof amplitude !== 'undefined') {
+            amplitude.track('Outbound Link Click', {
+              url: href,
+              domain: hostname,
+              article: window.location.pathname,
+              link_text: (link.textContent || '').trim().substring(0, 100),
+            });
+          }
+        } catch(err) {
+          // invalid URL, skip tracking
+        }
+      });
+    });
+  </script>
 </BaseLayout>
 
 <style>
